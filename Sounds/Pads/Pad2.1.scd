@@ -19,7 +19,7 @@
 	noise = PinkNoise.ar(0.01, 2) * envNoise;
 	noise = RLPF.ar(noise, 4000, 1);
 	noise = RHPF.ar(noise, 250, 1);
-	sig3 = Mix.ar([sig3, noise]);
+	//sig3 = Mix.ar([sig3, noise]);
 	sig3 = FreeVerb.ar(sig3, 0.3, 0.5, 0.7);
 	Out.ar(0, sig3 * env);
 	Out.ar(1, sig3 * env);
