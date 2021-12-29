@@ -9,7 +9,7 @@ s.freqscope;
 SynthDef.new(\snare, {
 	arg attack=0.01, release=2, c1=1, c2=(-1), amplitude=1, buffer=~snare, out=0;
 	var signal, envelope, mix, mixAdd;
-	envelope = Env([0,1,0], [attack, release], [c1,c2]).kr(2);
+	envelope = Env([0,1,0], [attack, release], [c1,c2]).kr;
 	signal = PlayBuf.ar(2, buffer);
 
 	mix = Mix.ar([LPF.ar(Saw.ar(6200, 0.2, 0.4), 9000, 1, 1) * LFTri.ar(8000, 0.2, 0.3, 0.3) * HPF.ar(LFNoise2.ar(7500, 1, 0.1), 8500, 1, 1)]);

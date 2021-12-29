@@ -32,8 +32,7 @@ SynthDef.new(\clap, {
 	signal = signal.softclip * amplitude;
 
 	Out.ar(out, Pan2.ar(signal, pan));
-}
-).add;
+}).add;
 )
 
 x = Synth.new(\clap);

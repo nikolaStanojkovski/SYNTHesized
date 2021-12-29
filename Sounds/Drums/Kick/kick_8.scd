@@ -12,7 +12,7 @@ SynthDef.new(\kick, {
 	envelope = Env([0,1,0], [attack, release], [c1,c2]).kr(2);
 
 	signal = PlayBuf.ar(2, buffer) * 0.6;
-	freqSweep = Env([350,80,5],[0.01,1.5],[1, (-6)]).ar;
+	freqSweep = Env([300,70,10],[0.01,1.5],[1, (-6)]).ar;
 
 	signal = signal * freqSweep * 2;
 	signal = BRF.ar(signal, 500, 0.4, 1, 0.4);

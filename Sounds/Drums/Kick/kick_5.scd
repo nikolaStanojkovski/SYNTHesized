@@ -6,7 +6,7 @@ Env([0, 1, 0], [1, 1], [1, -1]).plot;
 
 (
 SynthDef.new(\kick, {
-	arg freqFirst=300,freqSecond=30,freqThird=0,freqDur1=0.05,freqDur2=5,freqC1=1,freqC2=(-10),atack=0.01,decay=0.05,sustain=0.03,release=1.5,c1=1,c2=(-20),amplitude=0.35,pan=0,out=0;
+	arg freqFirst=300,freqSecond=70,freqThird=10,freqDur1=0.05,freqDur2=5,freqC1=1,freqC2=(-10),atack=0.01,decay=0.05,sustain=0.03,release=1.5,c1=1,c2=(-20),amplitude=0.35,pan=0,out=0;
 	var signal,envelope,freqSweep,mixA,mixB,mixC,mixD,mixE, noise;
 
 	freqSweep = Env([freqFirst,freqSecond,freqThird],[freqDur1,freqDur2],[freqC1, freqC2]).ar;

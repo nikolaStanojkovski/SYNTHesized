@@ -31,8 +31,7 @@ SynthDef(\clap, {
 	DetectSilence.ar(in: signal, doneAction: 2);
 
 	Out.ar(out, Pan2.ar(signal, pan));
-}
-).add;
+}).add;
 )
 
 x = Synth.new(\clap);
