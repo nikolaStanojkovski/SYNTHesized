@@ -14,8 +14,8 @@ SynthDef.new(\hiHat, {
 	sig = HPF.ar(sig, 4000);
 
 	sig = LPF.ar(sig, 4300);
-	
-	sig = FreeVerb.ar(sig, mix: 1, room:0.4);
+
+	sig = FreeVerb.ar(sig, mix: 0.2, room:0.3);
 
 
 	Out.ar(out, sig);
@@ -24,5 +24,7 @@ SynthDef.new(\hiHat, {
 )
 
 x = Synth.new(\hiHat);
+
+s.makeWindow;
 
 x.free;
