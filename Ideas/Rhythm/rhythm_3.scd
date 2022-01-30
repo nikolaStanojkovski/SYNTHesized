@@ -7,7 +7,7 @@ var s, k;
 
 (
 var kick_2_buffer;
-//
+
 kick_2_buffer = Buffer.read(s, "C:/Users/Nick/Desktop/Fax/Kompjuterski zvuk i muzika/Project/Code/Kicks/kick_sample_1.wav");
 
 SynthDef.new(\kick, {
@@ -60,8 +60,8 @@ SynthDef.new(\kick, {
 
 (
 SynthDef.new(\snare, {
-	arg amplitude_1=0.3,attack_1=0.05,decay_1=0.03,release_1=0.1,curve_1=(-6),preAmplitude_1=1.2,harmonic_1=1.2, oscsHarmonic_1=1.6,blend_1=0.333,oscsAmplitude_1=1,noiseRatio_1=0.4,noiseBottom_1=200,noisePeak_1=6900,rq_1=0.6, noiseamplitude_1=1,amplitude_2=0.3,attack_2=0.01,release_2=0.25,out=0,pan=0,amplitude=1;
-	var envOscs_1,envSweep_1,envNoise_1,oscs_1,noise_1,signal_1,noise_2,signal_2,envelope_2,signal;
+	arg amplitude_1=0.3,attack_1=0.05,decay_1=0.03,release_1=0.1,curve_1=(-6),preAmplitude_1=1.2,harmonic_1=1.2, oscsHarmonic_1=1.6,blend_1=0.333,oscsAmplitude_1=1,noiseRatio_1=0.4,noiseBottom_1=200,noisePeak_1=6900,rq_1=0.6, noiseamplitude_1=1,amplitude_2=0.3,attack_2=0.01,release_2=0.25,amplitude_3=0.6,attack_3=0.005,release_3=0.5, curve_3= -4,spreadRate_3=75,minDelay_3=0.025,maxDelay_3=0.05,decay_3=0.25,rq_3=0.4,blend_3=0.7,reverb_3=0.3,size_3 = 0.2,damp_3=1,out=0,pan=0,amplitude=1;
+	var envOscs_1,envSweep_1,envNoise_1,oscs_1,noise_1,signal_1,noise_2,signal_2,envelope_2,envelope1_3, envelope2_3, signal_3, noise1_3, noise2_3, spread_3, spreadsignal_3, signal;
 
 	envOscs_1 = Env.new(
 		            levels: [0.5, 1, 0.5, 0] * oscsAmplitude_1,
@@ -92,7 +92,22 @@ SynthDef.new(\snare, {
 	signal_2 = signal_2 * envelope_2;
 	signal_2 = FreeVerb.ar(signal_2);
 
-	signal = Mix.ar([signal_1, signal_2]);
+	spread_3 = LFNoise1.kr(spreadRate_3).range(minDelay_3, maxDelay_3);
+	envelope1_3 = Env.perc(attackTime: attack_3 / 10, releaseTime: release_3 / 8, curve: [0, curve_3]).kr;
+	envelope1_3 = CombC.ar(in: envelope1_3, maxdelaytime: maxDelay_3, delaytime: spread_3, decaytime: decay_3);
+	noise1_3 = GrayNoise.ar(envelope1_3);
+	noise1_3 = RHPF.ar(in: noise1_3, freq: 1000, rq: rq_3);
+	noise1_3 = BPF.ar(in: noise1_3, freq: 2500, rq: 3);
+	envelope2_3 = Env.perc(attackTime: attack_3, releaseTime: release_3, curve: [0, curve_3]).kr;
+	noise2_3 = GrayNoise.ar(envelope2_3);
+	noise2_3 = RHPF.ar(in: noise2_3, freq: 1000, rq: rq_3);
+	noise2_3 = BPF.ar(in: noise2_3, freq: 1600, rq: 0.9);
+	signal_3 = Mix.ar((blend_3 * noise1_3) + ((1 - blend_3) * noise2_3));
+	signal_3 = (signal_3 * 2).softclip;
+	signal_3 = FreeVerb.ar(in: signal_3, mix: reverb_3, room: size_3, damp: damp_3, mul: amplitude_3);
+	DetectSilence.ar(in: signal_3, doneAction: 2);
+
+	signal = Mix.ar([signal_1, signal_2, signal_3*0.6]);
 
 	Out.ar(out, Pan2.ar(signal*amplitude, pan));
 }).add;
@@ -110,14 +125,14 @@ SynthDef.new(\snare, {
 
   kick = Pseq(
 	[
-		1, 1, 0, 1,
-		1, 1, 0, 1,
-		1, 1, 0, 1,
+		1, 0, 0, 0.8,
+		1, 0, 0, 0.85,
+		0.75, 0, 0, 0.8,
+		1, 0, 0, 0.75,
+		0.9, 0, 0, 0.9,
+		1, 0.4, 0, 1,
 		1, 0, 0, 1,
-		1, 1, 0, 1,
-		1, 1, 0, 1,
-		1, 0, 0, 1,
-		1, 1, 0, 1
+		0, 0.7, 0, 0.4
 	], inf).asStream;
 
   kick_duration = Pseq(
@@ -128,13 +143,13 @@ SynthDef.new(\snare, {
   snare = Pseq(
 	[
 		0, 0, 1, 0,
+		0, 0, 0.97, 0,
+		0, 0, 1, 0,
+		0, 0, 0.87, 0,
 		0, 0, 1, 0,
 		0, 0, 1, 0,
-		0, 0, 1, 0,
-		1, 0, 1, 0,
-		0, 0, 1, 0,
-		0, 0, 1, 0,
-		1, 0, 1, 1
+		0, 0, 0.9, 0,
+		0.71, 0, 0.45,0.05
 	], inf).asStream;
 
   snare_duration = Pseq(
