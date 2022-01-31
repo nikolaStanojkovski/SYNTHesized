@@ -1,4 +1,4 @@
-var s, k;
+var s, k, h;
 
 
 ///////////////////////
@@ -113,6 +113,31 @@ SynthDef.new(\snare, {
 }).add;
 )
 
+///////////////////////
+//////   Hi-hat  //////
+///////////////////////
+
+(
+SynthDef.new(\hiHat, {
+	arg out=0, attack = 0.0001, decay = 0.035, sustain = 0.01, release = 0.01,
+	curve = -1, attackLevel = 0.9, decayLevel = 0.2, sustainLevel = 0.1, releaseLevel = 0.0,amplitude=1;
+	var env, sig;
+
+	if(amplitude != 0, {
+		env = EnvGen.kr(Env.new([0, attackLevel, decayLevel, sustainLevel, releaseLevel],
+		[attack, decay, sustain, release], [curve, curve, curve, curve]), doneAction:2);
+
+		sig = WhiteNoise.ar(0.25!2) * env;
+		sig = HPF.ar(sig, 4000);
+		sig = FreeVerb.ar(sig, mix:
+		sig = LPF.ar(sig, 4300);0.2, room:0.3);
+
+		Out.ar(out, sig*amplitude);
+	});
+
+}).add;
+)
+
 
 ///////////////
 ///////////////
@@ -156,6 +181,23 @@ SynthDef.new(\snare, {
 	[
 		1/2
 	], inf).asStream;
+	
+  hiHat = Pseq(
+	[
+		0, 0, 1, 0.7, 0, 0, 1, 0.7,
+		0, 0, 1, 0.7, 0, 0, 1, 0.7,
+		0, 0, 1, 0.7, 0, 0, 1, 0.7,
+		0, 0.9, 1, 0.7, 0, 0.9, 1, 0.7,
+		0, 0, 1, 0, 0, 0, 1, 0,
+		0, 0, 1, 0, 0, 1, 0, 0,
+		0, 0, 1, 0, 0, 0, 1, 0,
+		0, 0, 1, 0.7, 0, 0.9, 1, 0.7,
+	], inf).asStream;
+
+   hiHat_duration = Pseq(
+	[
+		1/4
+	], inf).asStream;
 
 
   TempoClock.default.tempo = 93/60;
@@ -171,6 +213,12 @@ SynthDef.new(\snare, {
     \dur, snare_duration,
     \amplitude, snare*1.3
   );
+  
+  h = Pbind(
+	\instrument, \hiHat,
+    \dur, hiHat_duration,
+    \amplitude, hiHat*0.8
+  );
 )
 
 /////////////
@@ -181,9 +229,9 @@ SynthDef.new(\snare, {
 
 
 (
-  k.play; s.play;
+  k.play; s.play; h.play;
 )
 
 (
-  k.stop; s.stop;
+  k.stop; s.stop; h.stop;
 )
