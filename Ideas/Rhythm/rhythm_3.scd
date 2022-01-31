@@ -1,4 +1,4 @@
-var s, k;
+var s, k, h;
 
 
 ///////////////////////
@@ -156,6 +156,16 @@ SynthDef.new(\snare, {
 	[
 		1/2
 	], inf).asStream;
+	
+	hiHat = Pseq(
+	[
+		1, 0.5, 0.7, 0.5, 0.9, 0.5, 0.7, 0.5
+	], inf).asStream;
+
+   hiHat_duration = Pseq(
+	[
+		1/4
+	], inf).asStream;
 
 
   TempoClock.default.tempo = 93/60;
@@ -171,6 +181,12 @@ SynthDef.new(\snare, {
     \dur, snare_duration,
     \amplitude, snare*1.4
   );
+  
+  h = Pbind(
+	\instrument, \hiHat,
+    \dur, hiHat_duration,
+    \amplitude, hiHat*0.8
+  );
 )
 
 /////////////
@@ -181,9 +197,9 @@ SynthDef.new(\snare, {
 
 
 (
-  k.play; s.play;
+  k.play; s.play; h.play;
 )
 
 (
-  k.stop; s.stop;
+  k.stop; s.stop;h.stop;
 )
