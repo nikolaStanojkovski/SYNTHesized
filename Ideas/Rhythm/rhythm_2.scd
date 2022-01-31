@@ -113,6 +113,100 @@ SynthDef.new(\snare, {
 )
 
 
+///////////////////////
+//////   Hi-hat  //////
+///////////////////////
+
+(
+SynthDef.new(\hiHat, {
+	arg out=0, attack = 0.0001, decay = 0.035, sustain = 0.01, release = 0.01,
+	curve = -1, attackLevel = 0.9, decayLevel = 0.2, sustainLevel = 0.1, releaseLevel = 0.0,amplitude=1;
+	var env, sig;
+
+	if(amplitude != 0, {
+		env = EnvGen.kr(Env.new([0, attackLevel, decayLevel, sustainLevel, releaseLevel],
+		[attack, decay, sustain, release], [curve, curve, curve, curve]), doneAction:2);
+
+		sig = WhiteNoise.ar(0.25!2) * env;
+		sig = HPF.ar(sig, 4000);
+		sig = FreeVerb.ar(sig, mix:
+		sig = LPF.ar(sig, 4300);0.2, room:0.3);
+
+		Out.ar(out, sig*amplitude);
+	});
+
+}).add;
+)
+
+///////////////////////
+//////  Shaker   //////
+///////////////////////
+
+(
+SynthDef.new(\shaker2, {
+	arg out=0, attack = 0.1, decay = 0.11, sustain = 0.001, release = 0,
+	curve = -1, attackLevel = 0.9, decayLevel = 0.1, sustainLevel = 0, init = 1, amplitude =1;
+	var env, sig,
+	env2, sig2, final;
+
+	env = EnvGen.kr(Env.new([0, attackLevel, decayLevel, sustainLevel],
+		[attack, decay, sustain], [curve, curve, curve]), doneAction:2);
+
+	sig = WhiteNoise.ar(0.25!2) * env;
+
+	sig = HPF.ar(sig, 2000);
+
+
+
+
+	env2 = EnvGen.kr(Env.new([0, 0, attackLevel, decayLevel, sustainLevel],
+		[init, attack, decay, sustain], [curve, curve, curve, curve]), doneAction:2);
+
+
+	sig2 = WhiteNoise.ar(0.25!2) * env2;
+
+	sig2 = HPF.ar(sig2, 2000);
+
+	final = sig * sig2 * 0.4;
+
+
+	Out.ar(out, sig * amplitude);
+}).add;
+)
+
+///////////////////////
+//////  Cowbell  //////
+///////////////////////
+
+(
+SynthDef.new(\cowbell, {
+	arg out=0, attack = 0.0005, decay = 0.05, sustain = 0.01, release = 0.01,
+	curve = -1, attackLevel = 0.8, decayLevel = 0.2, sustainLevel = 0.1, releaseLevel = 0, amplitude =1;
+	var env, sig, noise;
+
+	env = EnvGen.kr(Env.new([0, attackLevel, decayLevel, sustainLevel, releaseLevel],
+		[attack, decay, sustain, release], [curve, curve, curve, curve]), doneAction:2);
+
+	sig = Saw.ar([349.23, 690]) * env;
+
+
+	noise = PinkNoise.ar(0.25) * 0.2;
+
+
+	noise = HPF.ar(noise, 420);
+
+	noise = LPF.ar(noise, 900);
+
+
+	sig = Mix.new([sig, noise])!2;
+
+	sig = FreeVerb.ar(sig, mix: 0.4, room:0.4, mul:0.8);
+
+	Out.ar(out, sig* amplitude);
+
+}).add;
+)
+
 ///////////////
 ///////////////
 // Sequence ///
@@ -120,7 +214,8 @@ SynthDef.new(\snare, {
 ///////////////
 
 (
-  var kick, kick_duration, snare, snare_duration;
+  var kick, kick_duration, snare, snare_duration, hiHat, hiHat_duration, shaker, shaker_duration,
+          cowbell, cowbell_duration;
 
   kick = Pseq(
 	[
@@ -156,9 +251,65 @@ SynthDef.new(\snare, {
 		1/2
 	], inf).asStream;
 
+   hiHat = Pseq(
+	[
+		0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 1, 0.6,
+		0, 0, 0, 0, 0, 1, 0, 0,
+		0, 0, 1, 0.7, 0, 0.9, 0, 0,
+	//	0, 0, 1, 0, 0, 0, 1, 0,
+    //  0, 0, 1, 0, 0, 1, 0, 0,
+	//	0, 0, 1, 0, 0, 0, 1, 0,
+	//	0, 0, 1, 1, 0, 1, 1, 1,
+	], inf).asStream;
+
+   hiHat_duration = Pseq(
+	[
+		1/4
+	], inf).asStream;
+
+ shaker =  Pseq(
+	[
+		1, 0.3, 0.6, 0.3, 0.8, 0.35, 0.55, 0.25,
+		0.7, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0,
+//		0, 0, 1, 0, 0, 0, 1, 0,
+//		0, 0, 1, 0, 0, 1, 0, 0,
+//		0, 0, 1, 0, 0, 0, 1, 0,
+//		0, 0, 1, 1, 0, 1, 1, 1,
+	], inf).asStream;
+   shaker_duration = Pseq(
+	[
+		1/4
+	], inf).asStream;
+
+cowbell =  Pseq(
+	[
+		0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 1, 0.7, 0, 1, 0, 1,
+//		0, 0, 1, 0, 0, 0, 1, 0,
+//		0, 0, 1, 0, 0, 1, 0, 0,
+//		0, 0, 1, 0, 0, 0, 1, 0,
+//		0, 0, 1, 1, 0, 1, 1, 1,
+	], inf).asStream;
+   cowbell_duration = Pseq(
+	[
+		1/4
+	], inf).asStream;
+
+
 
   TempoClock.default.tempo = 93/60;
 
+
+   ~sh = Pbind(
+	\instrument, \shaker2,
+    \dur, shaker_duration,
+    \amplitude, shaker*0.3
+  );
   k = Pbind(
 	\instrument, \kick,
 	\dur, kick_duration,
@@ -170,6 +321,19 @@ SynthDef.new(\snare, {
     \dur, snare_duration,
     \amplitude, snare*1.4
   );
+
+  h = Pbind(
+	\instrument, \hiHat,
+    \dur, hiHat_duration,
+    \amplitude, hiHat*0.8
+  );
+
+ ~co = Pbind(
+	\instrument, \cowbell,
+    \dur, cowbell_duration,
+    \amplitude, cowbell*0.7
+  );
+
 )
 
 /////////////
@@ -177,12 +341,12 @@ SynthDef.new(\snare, {
 // Playing //
 /////////////
 /////////////
-
-
 (
-  k.play; s.play;
+  k.play; s.play;~sh.play;
+  h.play; ~co.play;
 )
 
 (
-  k.stop; s.stop;
+  k.stop; s.stop; ~sh.stop;
+  h.stop; ~co.stop;
 )
