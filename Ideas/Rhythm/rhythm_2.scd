@@ -331,7 +331,7 @@ cowbell =  Pseq(
  ~co = Pbind(
 	\instrument, \cowbell,
     \dur, cowbell_duration,
-    \amplitude, cowbell*0.7
+    \amplitude, cowbell*0.3
   );
 
 )
