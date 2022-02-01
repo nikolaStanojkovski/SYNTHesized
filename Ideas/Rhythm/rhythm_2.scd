@@ -1,5 +1,6 @@
 var s, k, h, sh, co;
 
+
 ///////////////////////
 ////// Kick 2,6 ///////
 ///////////////////////
@@ -53,9 +54,9 @@ SynthDef.new(\kick, {
 }).add;
 )
 
-///////////////////////
-////// Snare 2,3 //////
-///////////////////////
+///////////////////////////////
+////// Snare 2,3, Clap 2 //////
+///////////////////////////////
 
 (
 SynthDef.new(\snare, {
@@ -319,7 +320,7 @@ cowbell =  Pseq(
   s = Pbind(
 	\instrument, \snare,
     \dur, snare_duration,
-    \amplitude, snare*1.4
+    \amplitude, snare*1.42
   );
 
   h = Pbind(
@@ -341,8 +342,9 @@ cowbell =  Pseq(
 // Playing //
 /////////////
 /////////////
+
 (
-  k.play; s.play;~sh.play;
+  k.play; s.play;  ~sh.play;
   h.play; ~co.play;
 )
 

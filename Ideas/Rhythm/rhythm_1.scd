@@ -146,7 +146,7 @@ SynthDef.new(\hiHat, {
 ///////////////
 
 (
-  var kick, kick_duration, snare, snare_duration;
+  var kick, kick_duration, snare, snare_duration, hat, hat_duration;
 
   kick = Pseq(
 	[
@@ -181,8 +181,8 @@ SynthDef.new(\hiHat, {
 	[
 		1/2
 	], inf).asStream;
-	
-  hiHat = Pseq(
+
+  hat = Pseq(
 	[
 		0, 0, 1, 0.7, 0, 0, 1, 0.7,
 		0, 0, 1, 0.7, 0, 0, 1, 0.7,
@@ -194,7 +194,7 @@ SynthDef.new(\hiHat, {
 		0, 0, 1, 0.7, 0, 0.9, 1, 0.7,
 	], inf).asStream;
 
-   hiHat_duration = Pseq(
+   hat_duration = Pseq(
 	[
 		1/4
 	], inf).asStream;
@@ -211,13 +211,13 @@ SynthDef.new(\hiHat, {
   s = Pbind(
 	\instrument, \snare,
     \dur, snare_duration,
-    \amplitude, snare*1.3
+    \amplitude, snare*1.35
   );
-  
+
   h = Pbind(
 	\instrument, \hiHat,
-    \dur, hiHat_duration,
-    \amplitude, hiHat*0.8
+    \dur, hat_duration,
+    \amplitude, hat*0.8
   );
 )
 

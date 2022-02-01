@@ -54,9 +54,9 @@ SynthDef.new(\kick, {
 }).add;
 )
 
-///////////////////////
-////// Snare 2,3 //////
-///////////////////////
+///////////////////////////////
+////// Snare 2,3, Clap 2 //////
+///////////////////////////////
 
 (
 SynthDef.new(\snare, {
@@ -138,6 +138,7 @@ SynthDef.new(\hiHat, {
 
 }).add;
 )
+
 ///////////////
 ///////////////
 // Sequence ///
@@ -145,7 +146,7 @@ SynthDef.new(\hiHat, {
 ///////////////
 
 (
-  var kick, kick_duration, snare, snare_duration;
+  var kick, kick_duration, snare, snare_duration, hat, hat_duration;
 
   kick = Pseq(
 	[
@@ -173,20 +174,20 @@ SynthDef.new(\hiHat, {
 		0, 0, 1, 0,
 		0, 0, 1, 0,
 		0, 0, 0.9, 0,
-		0.71, 0, 0.45,0.05
+		0.5, 0, 0.8,0.05
 	], inf).asStream;
 
   snare_duration = Pseq(
 	[
 		1/2
 	], inf).asStream;
-	
-	hiHat = Pseq(
+
+  hat = Pseq(
 	[
 		1, 0.5, 0.7, 0.5, 0.9, 0.5, 0.7, 0.5
 	], inf).asStream;
 
-   hiHat_duration = Pseq(
+  hat_duration = Pseq(
 	[
 		1/4
 	], inf).asStream;
@@ -205,11 +206,11 @@ SynthDef.new(\hiHat, {
     \dur, snare_duration,
     \amplitude, snare*1.4
   );
-  
+
   h = Pbind(
 	\instrument, \hiHat,
-    \dur, hiHat_duration,
-    \amplitude, hiHat*0.8
+    \dur, hat_duration,
+    \amplitude, hat*0.9
   );
 )
 
