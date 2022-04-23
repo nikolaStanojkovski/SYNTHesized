@@ -1,3 +1,4 @@
+// DO NOT EXPORT
 (
 SynthDef(\syn, {
 	arg out = 0, freq_1 = 65.4064, release1 = 0.2, release2 = 0;
@@ -7,7 +8,6 @@ SynthDef(\syn, {
 	var signal_3 = Saw.ar(freq_1, 0.1);
 	var hpf_0 = HPF.ar(signal_2, XLine.kr(3000, 20, 0.3), 0.9);
 	var lpf_1 = RLPF.ar(signal_2, XLine.kr(5000, 1220, 2), 0.5, 0.5);
-	//var test = signal_0 + signal_2_LPF + signal_3 + hpf_0 + hpf_1;
 	var final = signal_0 + signal_2_LPF + hpf_0 + lpf_1 + signal_3;
 	var env = EnvGen.ar(Env.new([1,0.0,0.0], [release2], 'lin'));
 	final = RLPF.ar(final, XLine.kr(10000, 300, 0.5), 0.4, 0.6);
@@ -19,7 +19,7 @@ SynthDef(\syn, {
 
 ~synth1 = Synth(\syn, [\out, 0]);
 
-~t = TempoClock(93/60);
+TempoClock.default.tempo = 93/60;
 (
 Pbindef(\test,
 	\instrument, \syn,

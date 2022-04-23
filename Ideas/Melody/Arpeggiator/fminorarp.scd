@@ -1,6 +1,6 @@
 s.boot
 (
-SynthDef(\pluck, {|freq = 440, dur = 5|
+SynthDef(\fminoarp, {|freq = 440, dur = 5|
 var klang,note,local;
 dur = dur * 2;
 note = freq.cpsmidi;
@@ -12,15 +12,40 @@ Out.ar(0, klang);
 )
 
 
+TempoClock.default.tempo = 93/60;
 (
 p = Pbind(
 	// the name of the SynthDef to use for each note
-	\instrument, \pluck,
+	\instrument, \fminoarp,
 	// MIDI note numbers -- converted automatically to Hz
-	\midinote, Pseq([
-29+24,31+24, 34+24,32+24, 29+24,31+24, 34+24,32+24, 29+24,31+24, 34+24,32+24, 29+24,34+24, 31+24,29+24, 31+36,31+36, 34+36,32+36, 29+36,31+36, 34+36,32+36, 29+36,31+36, 34+36,32+36, 29+36,34+36, 31+36,29+36], inf),
+	\midinote, Pseq([60,63,65,60,63,65,68,63,60,63,65,60,63,65,68,63,60,63,65,60,63,65,68,63,60,63,65,60,63,65,68,63,60,63,68,60,63,70,68,63,60,63,68,60,63,70,68,63,58,63,67,58,63,68,67,63,58,63,67,58,63,68,67,63], inf),
 	// rhythmic values
-	\dur, Pseq([0.16], inf)
+	\dur, Pseq([0.25], inf)
+).store;
+)
+
+
+TempoClock.default.tempo = 93/60;
+(
+p = Pbind(
+	// the name of the SynthDef to use for each note
+	\instrument, \fminoarp,
+	// MIDI note numbers -- converted automatically to Hz
+	\midinote, Pseq([65,60,72,60,65,60,72,60,65,60,72,60,65,60,72,60,68,65,75,65,68,65,75,65,68,65,75,65,68,65,75,65,68,63,72,63,68,63,72,63,68,63,72,63,68,63,72,63,67,63,70,63,67,63,70,63,68,63,70,63,67,63,70,63], inf),
+	// rhythmic values
+	\dur, Pseq([0.25], inf)
 ).play;
 )
-// 
+
+
+TempoClock.default.tempo = 93/60;
+(
+p = Pbind(
+	// the name of the SynthDef to use for each note
+	\instrument, \fminoarp,
+	// MIDI note numbers -- converted automatically to Hz
+	\midinote, Pseq([65,60,72,60,65,60,72,60,65,60,72,60,65,60,72,60,68,65,75,65,68,65,75,65,68,65,75,65,68,65,75,65,68,63,72,63,68,63,72,63,68,63,72,63,68,63,72,63,67,63,70,63,67,63,70,63,68,63,70,63,72,67,63,60], inf),
+	// rhythmic values
+	\dur, Pseq([0.25], inf)
+).play;
+)

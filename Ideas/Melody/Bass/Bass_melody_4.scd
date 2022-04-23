@@ -1,3 +1,4 @@
+// DO NOT EXPORT
 (
 SynthDef(\syn, {
 	arg out = 0, freq_1 = 65.4064, release1 = 0.2, release2 = 0;
@@ -19,11 +20,11 @@ SynthDef(\syn, {
 
 ~synth1 = Synth(\syn, [\out, 0]);
 
-~t = TempoClock(93/60);
+TempoClock.default.tempo = 93/60;
 (
 Pbindef(\test,
 	\instrument, \syn,
-	\dur, Pseq([1/4.5], inf),
+	\dur, Pseq([1/2], inf),
 	\freq_1, Pseq([87.307, 87.307, 87.307, 87.307, 87.307, 87.307, 87.307, 87.307, 87.307, 87.307, 87.307, 87.307, 87.307, 87.307, 87.307, 87.307, 103.83, 103.83, 103.83, 103.83, 103.83, 103.83, 103.83, 103.83, 77.782, 77.782, 77.782, 77.782, 77.782, 77.782, 77.782, 77.782], inf),
 	\release2, Pseq([0.1], inf),
 	\out, 0
