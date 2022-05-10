@@ -1,6 +1,6 @@
 (
 SynthDef(\syn, {
-	arg out = 0, freq_1 = 43.6535, release1 = 0.5, release2 = 0;
+	arg out = 0, amp = 1, freq_1 = 43.6535, release1 = 0.5, release2 = 0;
 	var signal_0 = SinOsc.ar(freq_1, 0.8, 0.3);
 	var signal_1 = Pulse.ar(freq_1, 0.6, 0.8);
 	var signal_1_LPF = RLPF.ar(signal_1, XLine.kr(5000, 300, 3), 0.8);
@@ -13,20 +13,74 @@ SynthDef(\syn, {
 	final = RLPF.ar(final, XLine.kr(10000, 600, 2.5), 0.2);
 	final = FreeVerb.ar(final, 0.33, 0.5, 0.5);
 	final = final * env;
-	Out.ar(out, final!2);
+	Out.ar(out, final!2 * amp);
 }).add;
 )
 
 ~synth1 = Synth.new(\syn, [\out, 0]);
 
+// octave down
 TempoClock.default.tempo = 186/60;
 (
 Pbindef(\test,
 	\instrument, \syn,
-	\dur, Pseq([1.5,2,2,1,0.5,1], inf),
+	\dur, Pseq([1.5,2,2,1,0.5,1], 2),
 	\freq_1, Pseq([174.614, 261.62, 233.08, 207.65, 195.998, 155.564], inf),
 	// \freq_2, Pseq([523.26, 392.00, 784.00, 311.13, 622.26, 466.16], inf),
 	\release2, Pseq([0.6, 0.8, 0.7, 0.4, 0.4, 0.4], inf),
-	\out, 0
+	\out, 0,
+	\amp, 0.4
+).play
+)
+
+// octave up
+TempoClock.default.tempo = 186/60;
+(
+Pbindef(\test,
+	\instrument, \syn,
+	\dur, Pseq([1.5,2,2,1,0.5,1], 2),
+	\freq_1, Pseq([349.228, 523.24, 466.16, 415.300, 391.996, 311.128], inf),
+	\release2, Pseq([0.6, 0.8, 0.7, 0.4, 0.4, 0.4], inf),
+	\out, 0,
+	\amp, 0.4
+).play
+)
+
+// octave up up
+TempoClock.default.tempo = 186/60;
+(
+Pbindef(\test,
+	\instrument, \syn,
+	\dur, Pseq([1.5,2,2,1,0.5,1], 2),
+	\freq_1, Pseq([698.456, 1046.48, 932.32, 830.6, 783.992, 622.256], inf),
+	\release2, Pseq([0.6, 0.8, 0.7, 0.4, 0.4, 0.4], inf),
+	\out, 0,
+	\amp, 0.4
+).play
+)
+
+// another arp octave down
+TempoClock.default.tempo = 186/60;
+(
+Pbindef(\test,
+	\instrument, \syn,
+	\dur, Pseq([1,0.5,2.5,0.5,0.5,2], 2),
+	\freq_1, Pseq([349.228, 523.24, 466.16, 415.300, 391.996, 311.128], inf),
+	\release2, Pseq([0.4, 0.4, 0.4, 0.4, 0.4, 0.4], inf),
+	\out, 0,
+	\amp, 0.4
+).play
+)
+
+// another arp octave up
+TempoClock.default.tempo = 186/60;
+(
+Pbindef(\test,
+	\instrument, \syn,
+	\dur, Pseq([1,0.5,2.5,0.5,0.5,2], 2),
+	\freq_1, Pseq([698.456, 1046.48, 932.32, 830.6, 783.992, 622.256], inf),
+	\release2, Pseq([0.4, 0.4, 0.4, 0.4, 0.4, 0.4], inf),
+	\out, 0,
+	\amp, 0.4
 ).play
 )

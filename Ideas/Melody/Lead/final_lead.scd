@@ -1,7 +1,9 @@
-s.boot
+s.boot;
+
 MIDIClient.init;
 MIDIIn.connectAll;
 MIDIdef.noteOn(\noteOnTest,{"key down".postln});
+
 (
 SynthDef(\lead1, {
 	arg oscamp1=0.20, oscamp2 = 0.25, detune1 = -0.1, detune2=0.1,
@@ -41,15 +43,12 @@ SynthDef(\lead1, {
 )
 s.record()
 a = Synth(\lead1, [\pitch, 72]);
-a.free
+a.free;
 
 
-
-
-
-s.record()
+TempoClock.default.tempo = 93/60;
 (
-~myLead = Pbind(
+~myLead_1 = Pbind(
     \instrument, \lead1,
     \dur, Pseq([1.5,0.5,0.5,1,2.5,0.5,1.5,2.5,1.5,4],2).trace,
     \ffreqhi, 11000,
@@ -60,10 +59,58 @@ s.record()
     \out, 0,
 ).play(t)
 )
+
+(
+~myLead_1_octave = Pbind(
+    \instrument, \lead1,
+    \dur, Pseq([1.5,0.5,0.5,1,2.5,0.5,1.5,2.5,1.5,4],2).trace,
+    \ffreqhi, 11000,
+    \pitch, Pseq([77,77,80,77,84,85,84,80,82,79],inf).trace,
+    \atk, 0.001,
+    \rel, Pseq([1.7,0.7,0.7,1.2,2.7,0.7,1.7,2.7,1.7,4.2],inf).trace,
+    \amp, 1,
+    \out, 0,
+).play(t)
+)
+
+(
+~myLead_2 = Pbind(
+    \instrument, \lead1,
+    \dur, Pseq([1,0.25,0.5,1,2,0.25,1.5,0.5,1.5,2],2).trace,
+    \ffreqhi, 10000,
+    \pitch, Pseq([80,84,77,80,85,77,80,79,82,77],inf).trace,
+    \atk, 0.001,
+    \rel, Pseq([1.8,0.5,0.7,1.2,2.5,1,1.8,2.5,2,2],inf).trace,
+    \amp, 1,
+    \out, 0,
+).play(t)
+)
+
+(
+~myLead_1_thirds = Pbind(
+    \instrument, \lead1,
+    \dur, Pseq([1.5,0.5,0.5,1,2.5,0.5,1.5,2.5,1.5,4],2).trace,
+    \ffreqhi, 11000,
+    \pitch, Pseq([80,80,84,80,87,89,87,84,85,82],inf).trace,
+    \atk, 0.001,
+    \rel, Pseq([1.7,0.7,0.7,1.2,2.7,0.7,1.7,2.7,1.7,4.2],inf).trace,
+    \amp, 1,
+    \out, 0,
+).play(t)
+)
+
+(
+~myLead_1_sixths = Pbind(
+    \instrument, \lead1,
+    \dur, Pseq([1.5,0.5,0.5,1,2.5,0.5,1.5,2.5,1.5,4],2).trace,
+    \ffreqhi, 11000,
+    \pitch, Pseq([78,78,72,68,75,77,75,72,73,70],inf).trace,
+    \atk, 0.001,
+    \rel, Pseq([1.7,0.7,0.7,1.2,2.7,0.7,1.7,2.7,1.7,4.2],inf).trace,
+    \amp, 1,
+    \out, 0,
+).play(t)
+)
+
 s.stopRecording
-//57 65 60 66 55 63 60 55
 ~myLead.stop;
-
-
-
-t = TempoClock(93/60);
