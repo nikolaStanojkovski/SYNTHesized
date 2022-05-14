@@ -4,7 +4,7 @@ s.meter;
 
 (
 SynthDef.new(\riser, {
-	arg mainFreq=440, attack=3,decay=0.2,sustain=0.5,release=0.5,c1=1,c2=(-1),amplitude=0.6,pan=0,out=0;
+	arg mainFreq=349.23, attack=3,decay=0.2,sustain=0.5,release=0.5,c1=1,c2=(-1),amplitude=0.6,pan=0,out=0;
 	var signal, envelope, a, b, c, d, j, f, e;
 	envelope = Env([0,1,0],[attack, decay, sustain, release],[c1, c2]).ar;
 	a = [SinOsc.ar(mainFreq, 0.2, 0.2), Saw.ar(662, 0.2)];
