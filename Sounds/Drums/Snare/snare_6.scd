@@ -3,7 +3,7 @@ s.boot;
 s.meter;
 s.freqscope;
 
-~snare = Buffer.read(s, "C:/Users/Nick/Desktop/Fax/Kompjuterski zvuk i muzika/Project/Code/Snares/snare_sample_1.wav");
+~snare = Buffer.read(s, "C:/Users/Nick/Documents/GitHub/SYNTHesized/Sounds/Drums/Snare/snare_sample_1.wav");
 
 (
 SynthDef.new(\snare, {
