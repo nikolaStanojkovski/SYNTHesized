@@ -9,7 +9,7 @@ SynthDef.new(\synthesized_master, {
 	bass_2_octave_buffer, filter_chords_buffer, pad_buffer,
 	arp_1_buffer, arp_2_buffer, arp_3_buffer, downfilter_buffer, lead_1_1_buffer, lead_1_2_buffer, lead_1_3_buffer, lead_1_4_buffer,  lead_1_5_buffer, lead_2_1_buffer, lead_2_2_buffer, lead_2_3_buffer, lead_2_4_buffer, noise_hit_buffer, riser_1_buffer, riser_2_buffer, riser_3_buffer, upfilter_buffer, woosh_buffer,
 	kick, snare, cymbals, bass_1, bass_1_octave, bass_2, bass_2_octave, filter_chords, pad,
-	arp_1, arp_2, arp_3, downfilter, lead_1_1, lead_1_2, lead_1_3, lead_1_4, lead_1_5, lead_2, noise_hit, riser_1, riser_2, riser_3, upfilter, woosh, master;
+	arp_1, arp_2, arp_3, downfilter, lead_1_1, lead_1_2, lead_1_3, lead_1_4, lead_1_5, lead_2, noise_hit, riser_1, riser_2, riser_3, upfilter, woosh, drums_buss, bass_buss, pads_buss, leads_buss, arps_buss, fx_buss, master;
 
 	kick_buffer = Buffer.read(s, "C:/Users/Nick/Documents/GitHub/SYNTHesized/Mix/Stems/SYNTHesized 01. KICK.wav");
 	snare_buffer = Buffer.read(s, "C:/Users/Nick/Documents/GitHub/SYNTHesized/Mix/Stems/SYNTHesized 02. SNARE.wav");
@@ -41,6 +41,12 @@ SynthDef.new(\synthesized_master, {
 	riser_3_buffer = Buffer.read(s, "C:/Users/Nick/Documents/GitHub/SYNTHesized/Mix/Stems/SYNTHesized 28. RISER 3.wav");
 
 
+
+	///////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////
+	///////////////////// PROCESSING //////////////////////
+	///////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////
 
 	kick = PlayBuf.ar(2, kick_buffer.bufnum, BufRateScale.kr(kick_buffer), doneAction: 2);
 	// Kick processing here
@@ -148,10 +154,40 @@ SynthDef.new(\synthesized_master, {
 	// upfilter = ...
 
 
-	master = Mix([
-		kick, snare, cymbals, bass_1, bass_1_octave, bass_2, bass_2_octave, filter_chords, pad,
-		lead_1_1, lead_1_2, lead_1_3, lead_1_4, lead_1_5, lead_2,  arp_1, arp_2, arp_3,
+
+	///////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////
+	//////////////////////// BUSSES ///////////////////////
+	///////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////
+
+	drums_buss = Mix([
+		kick, snare, cymbals
+	]);
+
+	bass_buss = Mix([
+		bass_1, bass_1_octave, bass_2, bass_2_octave
+	]);
+
+	pads_buss = Mix([
+		filter_chords, pad
+	]);
+
+	leads_buss = Mix([
+		lead_1_1, lead_1_2, lead_1_3, lead_1_4, lead_1_5, lead_2
+	]);
+
+	arps_buss = Mix([
+		arp_1, arp_2, arp_3
+	]);
+
+	fx_buss = Mix([
 		riser_1, riser_2, riser_3, upfilter, downfilter, noise_hit, woosh
+	]);
+
+	master = Mix([
+		drums_buss, bass_buss, pads_buss,
+		leads_buss, arps_buss, fx_buss
 	]);
 	// Master track processing here
 	// master = ...
