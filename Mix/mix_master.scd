@@ -1,14 +1,13 @@
 s.boot;
 s.meter;
 
-
 (
 SynthDef.new(\synthesized_master, {
 	arg out=0, buffer, rate=1, amplitude=1;
 	var kick_buffer, snare_buffer, cymbals_buffer, bass_1_buffer, bass_1_octave_buffer, bass_2_buffer,
 	bass_2_octave_buffer, filter_chords_buffer, pad_buffer,
 	arp_1_buffer, arp_2_buffer, arp_3_buffer, downfilter_buffer, lead_1_1_buffer, lead_1_2_buffer, lead_1_3_buffer, lead_1_4_buffer,  lead_1_5_buffer, lead_2_1_buffer, lead_2_2_buffer, lead_2_3_buffer, lead_2_4_buffer, noise_hit_buffer, riser_1_buffer, riser_2_buffer, riser_3_buffer, upfilter_buffer, woosh_buffer,
-	kick, snare, cymbals, bass_1, bass_1_octave, bass_2, bass_2_octave, filter_chords, pad,
+	kick, kick_1, kick_2, snare, cymbals, bass_1, bass_1_octave, bass_2, bass_2_octave, filter_chords, pad,
 	arp_1, arp_2, arp_3, downfilter, lead_1_1, lead_1_2, lead_1_3, lead_1_4, lead_1_5, lead_2, noise_hit, riser_1, riser_2, riser_3, upfilter, woosh, drums_buss, bass_buss, pads_buss, leads_buss, arps_buss, fx_buss, master;
 
 	kick_buffer = Buffer.read(s, "C:/Users/Nick/Documents/GitHub/SYNTHesized/Mix/Stems/SYNTHesized 01. KICK.wav");
@@ -48,13 +47,34 @@ SynthDef.new(\synthesized_master, {
 	///////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////
 
-	kick = PlayBuf.ar(2, kick_buffer.bufnum, BufRateScale.kr(kick_buffer), doneAction: 2);
-	// Kick processing here
-	// kick = ...
+	// Kick processing
+	kick_1 = PlayBuf.ar(2, kick_buffer.bufnum, BufRateScale.kr(kick_buffer), doneAction: 2);
+	kick_2 = PlayBuf.ar(2, kick_buffer.bufnum, BufRateScale.kr(kick_buffer), doneAction: 2);
+	kick_1 = BPeakEQ.ar(kick_1, freq: 136.63, rq: 0.67, db: -3.18);
+	kick_1 = BPeakEQ.ar(kick_1, freq: 476.94, rq: 1, db: -6.86);
+	kick_1 = BPeakEQ.ar(kick_1, freq: 5384.4, rq: 1.87, db: 6.86);
+	kick_1 = BPeakEQ.ar(kick_1, freq: 7591.6, rq: 0.4, db: -9.06);
+	kick_2 = BHiPass.ar(kick_2, freq: 17.728, rq: 1);
+	kick_2 = BPeakEQ.ar(kick_2, freq: 52.116, rq: 1, db: 2.8);
+	kick_2 = BLowPass.ar(kick_2, freq: 76.339, rq: 0.86);
+	kick_2 = AnalogVintageDistortion .ar(kick_2, drivegain: 0.2, lowgain: 0.2, highgain: 0.04, shelvingfreq: 52.116);
+	kick = Mix([kick_1, kick_2]);
+	kick = DCompressor.ar(kick, sidechain: 0, ratio: 4, threshold: -24.1, attack: 30, release: 41.1, automakeup: 0);
+	kick = BHiPass.ar(kick, freq: 31.429, rq: 0.7);
+	kick = BPeakEQ.ar(kick, freq: 49.256, rq: 1.31, db: 2.45);
+	kick = BPeakEQ.ar(kick, freq: 351.44, rq: 2.75, db: -3.92);
+	kick = BPeakEQ.ar(kick, freq: 7519.5, rq: 2.22, db: 3.02);
 
+
+	// Snare processing
 	snare = PlayBuf.ar(2, snare_buffer.bufnum, BufRateScale.kr(snare_buffer), doneAction: 2);
-	// Snare processing here
-	// snare = ...
+	snare = BHiPass.ar(snare, freq: 88.088, rq: 0.98);
+	snare = BLowPass.ar(snare, freq: 11014, rq: 0.93);
+	snare = BPeakEQ.ar(snare, freq: 132.78, rq: 0.47, db: 11.9);
+	snare = BPeakEQ.ar(snare, freq: 1053, rq: 0.53, db: -4.08);
+	snare = BPeakEQ.ar(snare, freq: 6272.6, rq: 0.27, db: -2.2);
+	snare = DCompressor.ar(snare, sidechain: 0, ratio: 4, threshold: -40.3, attack: 31.1, release: 6.35, automakeup: 0);
+
 
 	cymbals = PlayBuf.ar(2, cymbals_buffer.bufnum, BufRateScale.kr(cymbals_buffer), doneAction: 2);
 	// Cymbals processing here
