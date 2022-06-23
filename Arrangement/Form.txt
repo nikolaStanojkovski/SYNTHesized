@@ -1,1 +1,1 @@
-Intro + Hook + Verse 1 + Prechorus + Chorus + Hook + Verse 2 + Prechorus + Chorus + Hook + Interlude + Prechorus + Verse Part + Outro
+Intro + Verse + Prechorus 1 + Pause + Chorus + Prechorus 2 + Pause + Chorus + Outro
