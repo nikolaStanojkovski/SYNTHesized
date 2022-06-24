@@ -14,4 +14,4 @@ A music project intended to create a whole <b>'synthwave'</b> song only with gen
 <hr />
 
 <b>Form:</b>
-<i> Intro + Hook + Verse 1 + Prechorus + Chorus + Hook + Verse 2 + Prechorus + Chorus + Hook + Interlude + Prechorus + Verse Part + Outro </i>
+<i> Intro + Verse + Prechorus 1 + Pause + Chorus + Prechorus 2 + Pause + Chorus + Outro </i>
