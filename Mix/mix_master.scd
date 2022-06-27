@@ -58,7 +58,7 @@ SynthDef.new(\synthesized_master, {
 	kick_2 = BHiPass.ar(kick_2, freq: 17.728, rq: 1);
 	kick_2 = BPeakEQ.ar(kick_2, freq: 52.116, rq: 1, db: 2.7);
 	kick_2 = BLowPass.ar(kick_2, freq: 76.339, rq: 0.86);
-	kick_2 = AnalogVintageDistortion.ar(kick_2, bias: 1, drivegain: 0.2, lowgain: 0.06, highgain: 0.05);
+	kick_2 = AnalogVintageDistortion.ar(kick_2, bias: 0.7, drivegain: 0.25, lowgain: 0.07, highgain: 0.06);
 	kick = Mix([kick_1, kick_2]);
 	kick = DCompressor.ar(kick, sidechain: 0, ratio: 4, threshold: -24.1, attack: 30, release: 41.1, automakeup: 0);
 	kick = BHiPass.ar(kick, freq: 31.429, rq: 0.7);
@@ -70,16 +70,17 @@ SynthDef.new(\synthesized_master, {
 	// Snare processing
 	snare = PlayBuf.ar(2, snare_buffer.bufnum, BufRateScale.kr(snare_buffer), doneAction: 2);
 	snare = BHiPass.ar(snare, freq: 88.088, rq: 0.98);
-	snare = BLowPass.ar(snare, freq: 11014, rq: 0.93);
 	snare = BPeakEQ.ar(snare, freq: 132.78, rq: 0.47, db: 11.2);
 	snare = BPeakEQ.ar(snare, freq: 1053, rq: 0.53, db: -4.08);
 	snare = BPeakEQ.ar(snare, freq: 6272.6, rq: 0.27, db: -2.4);
-	snare = DCompressor.ar(snare, sidechain: 0, ratio: 4, threshold: -40.2, attack: 31.1, release: 6.35, automakeup: 0);
+	snare = BLowPass.ar(snare, freq: 10200, rq: 0.93);
+	snare = DCompressor.ar(snare, sidechain: 0, ratio: 4, threshold: -35, attack: 31.1, release: 6.35, automakeup: 0);
 
 
+	// Cymbals processing
 	cymbals = PlayBuf.ar(2, cymbals_buffer.bufnum, BufRateScale.kr(cymbals_buffer), doneAction: 2);
-	// Cymbals processing here
-	// cymbals = ...
+	cymbals = BPeakEQ.ar(cymbals, freq:  5036.5, rq: 0.59, db: -2.78);
+	cymbals = BLowPass.ar(cymbals, freq: 13458, rq: 0.77);
 
 	bass_1 = PlayBuf.ar(2, bass_1_buffer.bufnum, BufRateScale.kr(bass_1_buffer), doneAction: 2);
 	// Bass 1 processing here
@@ -190,8 +191,8 @@ SynthDef.new(\synthesized_master, {
 	drums_buss = BPeakEQ.ar(drums_buss, freq: 348.10, rq: 0.42, db: -2.53);
 	drums_buss = BPeakEQ.ar(drums_buss, freq: 7200, rq: 1.3, db: 1);
 	drums_buss = BLowPass.ar(drums_buss, freq: 16134, rq: 1.1);
-	drums_buss = DCompressor.ar(drums_buss, sidechain: 0, ratio: 3.82, threshold: -31.2, attack: 28.3, release: 24.8, automakeup: 0);
-	drums_buss = FreeVerb.ar(drums_buss, mix: 0.3, room: 0.7, damp: 0.3);
+	drums_buss = FreeVerb.ar(drums_buss, mix: 0.4, room: 0.8, damp: 1);
+	drums_buss = DCompressor.ar(drums_buss, sidechain: 0, ratio: 3.82, threshold: -26, attack: 28.3, release: 24.8, automakeup: 0);
 
 
 	bass_buss = Mix([
