@@ -126,14 +126,33 @@ SynthDef.new(\synthesized_master, {
 	// Lead 1_5 processing here
 	// lead_1_5 = ...
 
+
+	lead_1 = Mix([
+		lead_1_1, lead_1_2, lead_1_3, lead_1_4, lead_1_5
+	]);
+	lead_1 = Greyhole.ar(lead_1,delayTime: 0.003,feedback:0.32,modDepth: 0.005,modFreq:0.41)
+	lead_1= FreeVerb.ar(lead_1, mix: 0.4)
+	// Lead_1 processing
+	lead_1 = BHiPass.ar(lead_1, freq: 180.19, rq: 0.970);
+	lead_1= BPeakEQ.ar(lead_1, freq: 798.48, rq: 3.021, db: -1.63);
+	lead_1= BPeakEQ.ar(lead_1, freq: 4323.3, rq: 0.971, db: 1.8);
+	lead_1= FreeVerb.ar(lead_1, mix: 0.4)
+
 	lead_2 = Mix([
 		PlayBuf.ar(2, lead_2_1_buffer.bufnum, BufRateScale.kr(lead_2_1_buffer), doneAction: 2),
 		PlayBuf.ar(2, lead_2_2_buffer.bufnum, BufRateScale.kr(lead_2_2_buffer), doneAction: 2),
 		PlayBuf.ar(2, lead_2_3_buffer.bufnum, BufRateScale.kr(lead_2_3_buffer), doneAction: 2),
 		PlayBuf.ar(2, lead_2_4_buffer.bufnum, BufRateScale.kr(lead_2_4_buffer), doneAction: 2)
 	]);
+
+	lead_2 = Greyhole.ar(lead_2,delayTime: 0.003,feedback:0,modDepth: 0.0037,modFreq:0.54)
+	lead_1= FreeVerb.ar(lead_1, mix: 0.43)
+	
 	// Lead 2 processing here
-	// lead_2 = ...
+	lead_2 = BHiPass.ar(lead_1, freq: 178.48, rq: 0.794);
+	lead_2= BPeakEQ.ar(lead_1, freq: 1456.7, rq: 1, db: -1.96);
+	lead_2= BPeakEQ.ar(lead_1, freq: 6272.6, rq: 1, db: 1.55);
+
 
 	arp_1 = PlayBuf.ar(2, arp_1_buffer.bufnum, BufRateScale.kr(arp_1_buffer), doneAction: 2);
 	// Arp 1 processing here
@@ -206,6 +225,10 @@ SynthDef.new(\synthesized_master, {
 	leads_buss = Mix([
 		lead_1_1, lead_1_2, lead_1_3, lead_1_4, lead_1_5, lead_2
 	]);
+	leads_buss= BPeakEQ.ar(leads_buss, freq: 1180.8, rq: 1.279, db: -2.29);
+	leads_buss= BPeakEQ.ar(leads_buss, freq: 7737.9, rq: 0.512, db: 2.29);
+	leads_buss = BLowPass.ar(leads_buss, freq: 21278, rq: 1);
+
 
 	arps_buss = Mix([
 		arp_1, arp_2, arp_3
