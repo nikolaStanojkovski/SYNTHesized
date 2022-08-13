@@ -136,7 +136,7 @@ SynthDef.new(\synthesized_master, {
 	lead_1 = BHiPass.ar(lead_1, freq: 180.19, rq: 0.970);
 	lead_1= BPeakEQ.ar(lead_1, freq: 798.48, rq: 3.021, db: -1.63);
 	lead_1= BPeakEQ.ar(lead_1, freq: 4323.3, rq: 0.971, db: 1.8);
-	lead_1= FreeVerb.ar(lead_1, mix: 0.4)
+	
 
 	lead_2 = Mix([
 		PlayBuf.ar(2, lead_2_1_buffer.bufnum, BufRateScale.kr(lead_2_1_buffer), doneAction: 2),
