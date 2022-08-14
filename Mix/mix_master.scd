@@ -136,7 +136,7 @@ SynthDef.new(\synthesized_master, {
 	lead_1 = BHiPass.ar(lead_1, freq: 180.19, rq: 0.970);
 	lead_1= BPeakEQ.ar(lead_1, freq: 798.48, rq: 3.021, db: -1.63);
 	lead_1= BPeakEQ.ar(lead_1, freq: 4323.3, rq: 0.971, db: 1.8);
-	
+
 
 	lead_2 = Mix([
 		PlayBuf.ar(2, lead_2_1_buffer.bufnum, BufRateScale.kr(lead_2_1_buffer), doneAction: 2),
@@ -147,7 +147,7 @@ SynthDef.new(\synthesized_master, {
 
 	lead_2 = Greyhole.ar(lead_2,delayTime: 0.003,feedback:0,modDepth: 0.0037,modFreq:0.54)
 	lead_1= FreeVerb.ar(lead_1, mix: 0.43)
-	
+
 	// Lead 2 processing here
 	lead_2 = BHiPass.ar(lead_1, freq: 178.48, rq: 0.794);
 	lead_2= BPeakEQ.ar(lead_1, freq: 1456.7, rq: 1, db: -1.96);
@@ -155,16 +155,14 @@ SynthDef.new(\synthesized_master, {
 
 
 	arp_1 = PlayBuf.ar(2, arp_1_buffer.bufnum, BufRateScale.kr(arp_1_buffer), doneAction: 2);
-	// Arp 1 processing here
-	// arp_1 = ...
+	arp_1 = BPeakEQ.ar(arp_1, freq: 319.45, rq: 0.522, db: -2.61)
 
 	arp_2 = PlayBuf.ar(2, arp_2_buffer.bufnum, BufRateScale.kr(arp_2_buffer), doneAction: 2);
-	// Arp 2 processing here
-	// arp_2 = ...
+	arp_2 = BPeakEQ.ar(arp_2, freq: 338.28, rq: 0.603, db: -2.78)
+	arp_2 = BPeakEQ.ar(arp_2, freq: 1226.8, rq: 1.283, db: 1.63)
 
 	arp_3 = PlayBuf.ar(2, arp_3_buffer.bufnum, BufRateScale.kr(arp_3_buffer), doneAction: 2);
-	// Arp 3 processing here
-	// arp_3 = ...
+
 
 	riser_1 = PlayBuf.ar(2, riser_1_buffer.bufnum, BufRateScale.kr(riser_1_buffer), doneAction: 2);
 	// Riser 1 processing here
@@ -233,6 +231,12 @@ SynthDef.new(\synthesized_master, {
 	arps_buss = Mix([
 		arp_1, arp_2, arp_3
 	]);
+	arps_buss = BHiPass.ar(arps_buss, freq: 139.27, rq: 1.298);
+	arps_buss= BPeakEQ.ar(arps_buss, freq: 500.25, rq: 0.829, db: -5.39);
+	arps_buss= BPeakEQ.ar(arps_buss, freq: 5980.3, rq: 1, db: 1.8);
+	arps_buss = BLowPass.ar(arps_buss, freq: 11443, rq: 1.03);
+	arps_buss = DCompressor.ar(arps_buss, ratio: 3.07, threshold: -27, attack: 7.89, release: 50, makeup: 0.5)
+
 
 	fx_buss = Mix([
 		riser_1, riser_2, riser_3, upfilter, downfilter, noise_hit, woosh
