@@ -99,12 +99,17 @@ SynthDef.new(\synthesized_master, {
 	// bass_2_octave = ...
 
 	filter_chords = PlayBuf.ar(2, filter_chords_buffer.bufnum, BufRateScale.kr(filter_chords_buffer), doneAction: 2);
-	// Bass Pad Octave processing here
-	// filter_chords = ...
+	filter_chords = Greyhole.ar(filter_chords,delayTime: 0.003,feedback:0,modDepth: 0.0037,modFreq:0.54);
+	filter_chords = FreeVerb.ar(filter_chords, mix: 0.44);
+	filter_chords = DCompressor.ar(filter_chords, ratio: 2.46, attack: 0.42, release: 100, threshold: -22.9);
+	filter_chords = BHiPass.ar(filter_chords, freq: 64.908, rq: 1.11);
+	filter_chords = BPeakEQ.ar(filter_chords, freq: 368.61, rq: 1, db: -1.88);
+	filter_chords = BPeakEQ.ar(filter_chords, freq: 870.09, rq: 1, db: -3.10);
 
 	pad = PlayBuf.ar(2, pad_buffer.bufnum, BufRateScale.kr(pad_buffer), doneAction: 2);
-	// Pad processing here
-	// pad = ...
+	pad = Greyhole.ar(pad, delayTime: 0.003,feedback:0,modDepth: 0.0025, modFreq:0.47);
+	pad = FreeVerb.ar(pad, mix: 0.60);
+	pad= DCompressor.ar(pad, ratio: 2.46, attack: 0.42, release: 100, threshold: -34);
 
 	lead_1_1 = PlayBuf.ar(2, lead_1_1_buffer.bufnum, BufRateScale.kr(lead_1_1_buffer), doneAction: 2);
 	// Lead 1_1 processing here
@@ -219,6 +224,10 @@ SynthDef.new(\synthesized_master, {
 	pads_buss = Mix([
 		filter_chords, pad
 	]);
+	pads_buss = BHiPass.ar(pads_buss, freq: 104.60, rq: 1.42);
+	pads_buss = BPeakEQ.ar(pads_buss, freq: 605.45, rq: 1, db: -1.88);
+	pads_buss = BPeakEQ.ar(pads_buss, freq: 5701.7, rq: 1.61, db: 1.96);
+	pads_buss = BLowPass.ar(pads_buss, freq: 13718, rq: 1.15);
 
 	leads_buss = Mix([
 		lead_1_1, lead_1_2, lead_1_3, lead_1_4, lead_1_5, lead_2
