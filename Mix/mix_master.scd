@@ -243,8 +243,8 @@ SynthDef.new(\synthesized_master, {
 	leads_buss = Mix([
 		lead_1_1, lead_1_2, lead_1_3, lead_1_4, lead_1_5, lead_2
 	]);
-	leads_buss= BPeakEQ.ar(leads_buss, freq: 1180.8, rq: 1.279, db: -2.29);
-	leads_buss= BPeakEQ.ar(leads_buss, freq: 7737.9, rq: 0.512, db: 2.29);
+	leads_buss= BPeakEQ.ar(leads_buss, freq: 1180.8, rq: 0.781, db: -2.29);
+	leads_buss= BPeakEQ.ar(leads_buss, freq: 7737.9, rq: 1.953, db: 2.29);
 	leads_buss = BLowPass.ar(leads_buss, freq: 21278, rq: 1);
 
 
