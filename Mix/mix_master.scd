@@ -8,7 +8,7 @@ SynthDef.new(\synthesized_master, {
 	bass_2_octave_buffer, filter_chords_buffer, pad_buffer,
 	arp_1_buffer, arp_2_buffer, arp_3_buffer, downfilter_buffer, lead_1_1_buffer, lead_1_2_buffer, lead_1_3_buffer, lead_1_4_buffer,  lead_1_5_buffer, lead_2_1_buffer, lead_2_2_buffer, lead_2_3_buffer, lead_2_4_buffer, noise_hit_buffer, riser_1_buffer, riser_2_buffer, riser_3_buffer, upfilter_buffer, woosh_buffer,
 	kick, kick_1, kick_2, snare, cymbals, bass_1, bass_1_octave, bass_2, bass_2_octave, filter_chords, pad,
-	arp_1, arp_2, arp_3, downfilter, lead_1_1, lead_1_2, lead_1_3, lead_1_4, lead_1_5, lead_2, noise_hit, riser_1, riser_2, riser_3, upfilter, woosh, drums_buss, bass_buss, pads_buss, leads_buss, arps_buss, fx_buss, master;
+	arp_1, arp_2, arp_3, downfilter, lead_1_1, lead_1_2, lead_1_3, lead_1_4, lead_1_5, lead_1, lead_2, noise_hit, riser_1, riser_2, riser_3, upfilter, woosh, drums_buss, bass_buss, pads_buss, leads_buss, arps_buss, fx_buss, master;
 
 	kick_buffer = Buffer.read(s, "C:/Users/Nick/Documents/GitHub/SYNTHesized/Mix/Stems/SYNTHesized 01. KICK.wav");
 	snare_buffer = Buffer.read(s, "C:/Users/Nick/Documents/GitHub/SYNTHesized/Mix/Stems/SYNTHesized 02. SNARE.wav");
@@ -135,13 +135,16 @@ SynthDef.new(\synthesized_master, {
 	lead_1 = Mix([
 		lead_1_1, lead_1_2, lead_1_3, lead_1_4, lead_1_5
 	]);
-	lead_1 = Greyhole.ar(lead_1,delayTime: 0.003,feedback:0.32,modDepth: 0.005,modFreq:0.41)
-	lead_1= FreeVerb.ar(lead_1, mix: 0.4)
+	
+	
+	lead_1 = Greyhole.ar(lead_1,delayTime: 0.003,feedback:0.32,modDepth: 0.005,modFreq:0.41);
+	
+	lead_1 = FreeVerb.ar(lead_1, mix: 0.4);
+	
 	// Lead_1 processing
-	lead_1 = BHiPass.ar(lead_1, freq: 180.19, rq: 0.970);
-	lead_1= BPeakEQ.ar(lead_1, freq: 798.48, rq: 3.021, db: -1.63);
-	lead_1= BPeakEQ.ar(lead_1, freq: 4323.3, rq: 0.971, db: 1.8);
-
+	lead_1 = BHiPass.ar(lead_1, freq: 180.19, rq: 1.03);
+	lead_1 = BPeakEQ.ar(lead_1, freq: 798.48, rq: 0.331, db: -1.63);
+	lead_1 = BPeakEQ.ar(lead_1, freq: 4323.3, rq: 1.029, db: 1.8);
 
 	lead_2 = Mix([
 		PlayBuf.ar(2, lead_2_1_buffer.bufnum, BufRateScale.kr(lead_2_1_buffer), doneAction: 2),
@@ -149,6 +152,14 @@ SynthDef.new(\synthesized_master, {
 		PlayBuf.ar(2, lead_2_3_buffer.bufnum, BufRateScale.kr(lead_2_3_buffer), doneAction: 2),
 		PlayBuf.ar(2, lead_2_4_buffer.bufnum, BufRateScale.kr(lead_2_4_buffer), doneAction: 2)
 	]);
+
+	 lead_2 = Greyhole.ar(lead_2,delayTime: 0.003,feedback:0,modDepth: 0.0037,modFreq:0.54);
+	 
+	 // Lead 2 processing here
+	 lead_2 = BHiPass.ar(lead_2, freq: 178.48, rq: 1.259);
+	 lead_2 = BPeakEQ.ar(lead_2, freq: 1456.7, rq: 1, db: -1.96);
+	 lead_2 = BPeakEQ.ar(lead_2, freq: 6272.6, rq: 1, db: 1.55);
+	
 
 	lead_2 = Greyhole.ar(lead_2,delayTime: 0.003,feedback:0,modDepth: 0.0037,modFreq:0.54)
 	lead_1= FreeVerb.ar(lead_1, mix: 0.43)
