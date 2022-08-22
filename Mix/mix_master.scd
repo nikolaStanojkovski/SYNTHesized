@@ -84,19 +84,19 @@ SynthDef.new(\synthesized_master, {
 
 	bass_1 = PlayBuf.ar(2, bass_1_buffer.bufnum, BufRateScale.kr(bass_1_buffer), doneAction: 2);
 	// Bass 1 processing here
-	// bass_1 = ...
+	bass_1 = BPeakEQ.ar(bass_1, db: -4.0);
 
 	bass_1_octave = PlayBuf.ar(2, bass_1_octave_buffer.bufnum, BufRateScale.kr(bass_1_octave_buffer), doneAction: 2);
 	// Bass 1 Octave processing here
-	// bass_1_octave = ...
+	bass_1_octave = BPeakEQ.ar(bass_1_octave, freq: 635.03, rq: 0.592, db: 2.20);
 
 	bass_2 = PlayBuf.ar(2, bass_2_buffer.bufnum, BufRateScale.kr(bass_2_buffer), doneAction: 2);
 	// Bass 2 processing here
-	// bass_2 = ...
+	bass_2 = BHiPass.ar(bass_2, freq: 1499, rq: 0.932);
 
 	bass_2_octave = PlayBuf.ar(2, bass_2_octave_buffer.bufnum, BufRateScale.kr(bass_2_octave_buffer), doneAction: 2);
 	// Bass 2 Octave processing here
-	// bass_2_octave = ...
+	bass_2_octave = BHiPass.ar(bass_2_octave, freq: 1499, rq: 0.932);
 
 	filter_chords = PlayBuf.ar(2, filter_chords_buffer.bufnum, BufRateScale.kr(filter_chords_buffer), doneAction: 2);
 	filter_chords = Greyhole.ar(filter_chords,delayTime: 0.003,feedback:0,modDepth: 0.0037,modFreq:0.54);
@@ -135,12 +135,12 @@ SynthDef.new(\synthesized_master, {
 	lead_1 = Mix([
 		lead_1_1, lead_1_2, lead_1_3, lead_1_4, lead_1_5
 	]);
-	
-	
+
+
 	lead_1 = Greyhole.ar(lead_1,delayTime: 0.003,feedback:0.32,modDepth: 0.005,modFreq:0.41);
-	
+
 	lead_1 = FreeVerb.ar(lead_1, mix: 0.4);
-	
+
 	// Lead_1 processing
 	lead_1 = BHiPass.ar(lead_1, freq: 180.19, rq: 1.03);
 	lead_1 = BPeakEQ.ar(lead_1, freq: 798.48, rq: 0.331, db: -1.63);
@@ -154,15 +154,15 @@ SynthDef.new(\synthesized_master, {
 	]);
 
 	 lead_2 = Greyhole.ar(lead_2,delayTime: 0.003,feedback:0,modDepth: 0.0037,modFreq:0.54);
-	 
+
 	 // Lead 2 processing here
 	 lead_2 = BHiPass.ar(lead_2, freq: 178.48, rq: 1.259);
 	 lead_2 = BPeakEQ.ar(lead_2, freq: 1456.7, rq: 1, db: -1.96);
 	 lead_2 = BPeakEQ.ar(lead_2, freq: 6272.6, rq: 1, db: 1.55);
-	
 
-	lead_2 = Greyhole.ar(lead_2,delayTime: 0.003,feedback:0,modDepth: 0.0037,modFreq:0.54)
-	lead_1= FreeVerb.ar(lead_1, mix: 0.43)
+
+	lead_2 = Greyhole.ar(lead_2,delayTime: 0.003,feedback:0,modDepth: 0.0037,modFreq:0.54);
+	lead_1= FreeVerb.ar(lead_1, mix: 0.43);
 
 	// Lead 2 processing here
 	lead_2 = BHiPass.ar(lead_1, freq: 178.48, rq: 0.794);
@@ -171,11 +171,11 @@ SynthDef.new(\synthesized_master, {
 
 
 	arp_1 = PlayBuf.ar(2, arp_1_buffer.bufnum, BufRateScale.kr(arp_1_buffer), doneAction: 2);
-	arp_1 = BPeakEQ.ar(arp_1, freq: 319.45, rq: 0.522, db: -2.61)
+	arp_1 = BPeakEQ.ar(arp_1, freq: 319.45, rq: 0.522, db: -2.61);
 
 	arp_2 = PlayBuf.ar(2, arp_2_buffer.bufnum, BufRateScale.kr(arp_2_buffer), doneAction: 2);
-	arp_2 = BPeakEQ.ar(arp_2, freq: 338.28, rq: 0.603, db: -2.78)
-	arp_2 = BPeakEQ.ar(arp_2, freq: 1226.8, rq: 1.283, db: 1.63)
+	arp_2 = BPeakEQ.ar(arp_2, freq: 338.28, rq: 0.603, db: -2.78);
+	arp_2 = BPeakEQ.ar(arp_2, freq: 1226.8, rq: 1.283, db: 1.63);
 
 	arp_3 = PlayBuf.ar(2, arp_3_buffer.bufnum, BufRateScale.kr(arp_3_buffer), doneAction: 2);
 
@@ -231,6 +231,12 @@ SynthDef.new(\synthesized_master, {
 	bass_buss = Mix([
 		bass_1, bass_1_octave, bass_2, bass_2_octave
 	]);
+	bass_buss = DCompressor.ar(bass_buss, ratio: 2.29, threshold: -25.5, attack: 0.8, release: 7.52, makeup: 3);
+	bass_buss = Greyhole.ar(bass_buss, delayTime: 0.003, feedback: 0.23, modDepth: 0.0042, modFreq:0.38);
+	bass_buss = BHiPass.ar(bass_buss, freq: 22.938, rq: 1.285);
+	bass_buss = BPeakEQ.ar(bass_buss, freq: 70.057, rq: 1, db: 1.22);
+	bass_buss = BPeakEQ.ar(bass_buss, freq: 912.61, rq: 1.216, db: 1.39);
+	bass_buss = BLowPass.ar(bass_buss, freq: 8272.4, rq: 0.869);
 
 	pads_buss = Mix([
 		filter_chords, pad
@@ -255,7 +261,7 @@ SynthDef.new(\synthesized_master, {
 	arps_buss= BPeakEQ.ar(arps_buss, freq: 500.25, rq: 0.829, db: -5.39);
 	arps_buss= BPeakEQ.ar(arps_buss, freq: 5980.3, rq: 1, db: 1.8);
 	arps_buss = BLowPass.ar(arps_buss, freq: 11443, rq: 1.03);
-	arps_buss = DCompressor.ar(arps_buss, ratio: 3.07, threshold: -27, attack: 7.89, release: 50, makeup: 0.5)
+	arps_buss = DCompressor.ar(arps_buss, ratio: 3.07, threshold: -27, attack: 7.89, release: 50, makeup: 0.5);
 
 
 	fx_buss = Mix([
