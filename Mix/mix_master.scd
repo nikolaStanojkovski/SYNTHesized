@@ -268,12 +268,24 @@ SynthDef.new(\synthesized_master, {
 		riser_1, riser_2, riser_3, upfilter, downfilter, noise_hit, woosh
 	]);
 
+	///////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////
+	//////////////////////// MASTER ///////////////////////
+	///////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////
+
 	master = Mix([
 		drums_buss, bass_buss, pads_buss,
 		leads_buss, arps_buss, fx_buss
 	]);
-	// Master track processing here
-	// master = ...
+
+	master = BHiPass.ar(master, freq: 20, rq: 1.162);
+	master = BPeakEQ.ar(master, freq: 42.65, rq: 1, db: 1.39);
+	master = BPeakEQ.ar(master, freq: 110.76, rq: 0.521, db: -1.39);
+	master = BPeakEQ.ar(master, freq: 338.28, rq: 0.493, db: -0.65);
+	master = BPeakEQ.ar(master, freq: 11443, rq: 1.4, db: 0.98);
+	master =  DCompressor.ar(master, ratio: 4, threshold: -17.1, attack: 30, release: 1, makeup: 0);
+	master =  Limiter.ar(master, in: 8.0, level: -0.3, dur: 0.01);
 
 	Out.ar(out, master * amplitude);
 }).add;
