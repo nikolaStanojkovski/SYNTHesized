@@ -82,69 +82,47 @@ SynthDef.new(\synthesized_master, {
 	cymbals = BPeakEQ.ar(cymbals, freq:  5036.5, rq: 0.59, db: -2.78);
 	cymbals = BLowPass.ar(cymbals, freq: 13458, rq: 0.77);
 
+
+	// Bass processing
 	bass_1 = PlayBuf.ar(2, bass_1_buffer.bufnum, BufRateScale.kr(bass_1_buffer), doneAction: 2);
-	// Bass 1 processing here
 	bass_1 = BPeakEQ.ar(bass_1, db: -4.0);
-
 	bass_1_octave = PlayBuf.ar(2, bass_1_octave_buffer.bufnum, BufRateScale.kr(bass_1_octave_buffer), doneAction: 2);
-	// Bass 1 Octave processing here
 	bass_1_octave = BPeakEQ.ar(bass_1_octave, freq: 635.03, rq: 0.592, db: 2.20);
-
 	bass_2 = PlayBuf.ar(2, bass_2_buffer.bufnum, BufRateScale.kr(bass_2_buffer), doneAction: 2);
-	// Bass 2 processing here
 	bass_2 = BHiPass.ar(bass_2, freq: 1499, rq: 0.932);
-
 	bass_2_octave = PlayBuf.ar(2, bass_2_octave_buffer.bufnum, BufRateScale.kr(bass_2_octave_buffer), doneAction: 2);
-	// Bass 2 Octave processing here
 	bass_2_octave = BHiPass.ar(bass_2_octave, freq: 1499, rq: 0.932);
 
+
+	// Pads processing
 	filter_chords = PlayBuf.ar(2, filter_chords_buffer.bufnum, BufRateScale.kr(filter_chords_buffer), doneAction: 2);
-	filter_chords = Greyhole.ar(filter_chords,delayTime: 0.003,feedback:0,modDepth: 0.0037,modFreq:0.54);
+	filter_chords = FreeVerb.ar(filter_chords, 0.25, 0.1, 0.1, 0.7);
 	filter_chords = FreeVerb.ar(filter_chords, mix: 0.44);
 	filter_chords = DCompressor.ar(filter_chords, ratio: 2.46, attack: 0.42, release: 100, threshold: -22.9);
 	filter_chords = BHiPass.ar(filter_chords, freq: 64.908, rq: 1.11);
 	filter_chords = BPeakEQ.ar(filter_chords, freq: 368.61, rq: 1, db: -1.88);
 	filter_chords = BPeakEQ.ar(filter_chords, freq: 870.09, rq: 1, db: -3.10);
-
 	pad = PlayBuf.ar(2, pad_buffer.bufnum, BufRateScale.kr(pad_buffer), doneAction: 2);
-	pad = Greyhole.ar(pad, delayTime: 0.003,feedback:0,modDepth: 0.0025, modFreq:0.47);
+	pad = FreeVerb.ar(pad, 0.25, 0.1, 0.1, 0.7);
 	pad = FreeVerb.ar(pad, mix: 0.60);
 	pad= DCompressor.ar(pad, ratio: 2.46, attack: 0.42, release: 100, threshold: -34);
 
+
+	// Leads processing
 	lead_1_1 = PlayBuf.ar(2, lead_1_1_buffer.bufnum, BufRateScale.kr(lead_1_1_buffer), doneAction: 2);
-	// Lead 1_1 processing here
-	// lead_1_1 = ...
-
 	lead_1_2 = PlayBuf.ar(2, lead_1_2_buffer.bufnum, BufRateScale.kr(lead_1_2_buffer), doneAction: 2);
-	// Lead 1_2 processing here
-	// lead_1_2 = ...
-
 	lead_1_3 = PlayBuf.ar(2, lead_1_3_buffer.bufnum, BufRateScale.kr(lead_1_3_buffer), doneAction: 2);
-	// Lead 1_3 processing here
-	// lead_1_3 = ...
-
 	lead_1_4 = PlayBuf.ar(2, lead_1_4_buffer.bufnum, BufRateScale.kr(lead_1_4_buffer), doneAction: 2);
-	// Lead 1_4 processing here
-	// lead_1_4 = ...
-
 	lead_1_5 = PlayBuf.ar(2, lead_1_5_buffer.bufnum, BufRateScale.kr(lead_1_5_buffer), doneAction: 2);
-	// Lead 1_5 processing here
-	// lead_1_5 = ...
-
-
 	lead_1 = Mix([
 		lead_1_1, lead_1_2, lead_1_3, lead_1_4, lead_1_5
 	]);
-
-
-	lead_1 = Greyhole.ar(lead_1,delayTime: 0.003,feedback:0.32,modDepth: 0.005,modFreq:0.41);
-
+	lead_1 = FreeVerb.ar(lead_1, 0.25, 0.1, 0.1, 0.7);
 	lead_1 = FreeVerb.ar(lead_1, mix: 0.4);
-
-	// Lead_1 processing
 	lead_1 = BHiPass.ar(lead_1, freq: 180.19, rq: 1.03);
 	lead_1 = BPeakEQ.ar(lead_1, freq: 798.48, rq: 0.331, db: -1.63);
 	lead_1 = BPeakEQ.ar(lead_1, freq: 4323.3, rq: 1.029, db: 1.8);
+	lead_1 = FreeVerb.ar(lead_1, mix: 0.43);
 
 	lead_2 = Mix([
 		PlayBuf.ar(2, lead_2_1_buffer.bufnum, BufRateScale.kr(lead_2_1_buffer), doneAction: 2),
@@ -152,61 +130,33 @@ SynthDef.new(\synthesized_master, {
 		PlayBuf.ar(2, lead_2_3_buffer.bufnum, BufRateScale.kr(lead_2_3_buffer), doneAction: 2),
 		PlayBuf.ar(2, lead_2_4_buffer.bufnum, BufRateScale.kr(lead_2_4_buffer), doneAction: 2)
 	]);
-
-	 lead_2 = Greyhole.ar(lead_2,delayTime: 0.003,feedback:0,modDepth: 0.0037,modFreq:0.54);
-
-	 // Lead 2 processing here
-	 lead_2 = BHiPass.ar(lead_2, freq: 178.48, rq: 1.259);
-	 lead_2 = BPeakEQ.ar(lead_2, freq: 1456.7, rq: 1, db: -1.96);
-	 lead_2 = BPeakEQ.ar(lead_2, freq: 6272.6, rq: 1, db: 1.55);
-
-
-	lead_2 = Greyhole.ar(lead_2,delayTime: 0.003,feedback:0,modDepth: 0.0037,modFreq:0.54);
-	lead_1= FreeVerb.ar(lead_1, mix: 0.43);
-
-	// Lead 2 processing here
+	lead_2 = FreeVerb.ar(lead_2, 0.25, 0.1, 0.1, 0.7);
+	lead_2 = BHiPass.ar(lead_2, freq: 178.48, rq: 1.259);
+	lead_2 = BPeakEQ.ar(lead_2, freq: 1456.7, rq: 1, db: -1.96);
+	lead_2 = BPeakEQ.ar(lead_2, freq: 6272.6, rq: 1, db: 1.55);
+	lead_2 = FreeVerb.ar(lead_2, 0.25, 0.1, 0.1, 0.7);
 	lead_2 = BHiPass.ar(lead_1, freq: 178.48, rq: 0.794);
-	lead_2= BPeakEQ.ar(lead_1, freq: 1456.7, rq: 1, db: -1.96);
-	lead_2= BPeakEQ.ar(lead_1, freq: 6272.6, rq: 1, db: 1.55);
+	lead_2 = BPeakEQ.ar(lead_1, freq: 1456.7, rq: 1, db: -1.96);
+	lead_2 = BPeakEQ.ar(lead_1, freq: 6272.6, rq: 1, db: 1.55);
 
 
+	// Arps processing
 	arp_1 = PlayBuf.ar(2, arp_1_buffer.bufnum, BufRateScale.kr(arp_1_buffer), doneAction: 2);
 	arp_1 = BPeakEQ.ar(arp_1, freq: 319.45, rq: 0.522, db: -2.61);
-
 	arp_2 = PlayBuf.ar(2, arp_2_buffer.bufnum, BufRateScale.kr(arp_2_buffer), doneAction: 2);
 	arp_2 = BPeakEQ.ar(arp_2, freq: 338.28, rq: 0.603, db: -2.78);
 	arp_2 = BPeakEQ.ar(arp_2, freq: 1226.8, rq: 1.283, db: 1.63);
-
 	arp_3 = PlayBuf.ar(2, arp_3_buffer.bufnum, BufRateScale.kr(arp_3_buffer), doneAction: 2);
 
 
+	// FX Processing
 	riser_1 = PlayBuf.ar(2, riser_1_buffer.bufnum, BufRateScale.kr(riser_1_buffer), doneAction: 2);
-	// Riser 1 processing here
-	// riser_1 = ...
-
 	riser_2 = PlayBuf.ar(2, riser_2_buffer.bufnum, BufRateScale.kr(riser_2_buffer), doneAction: 2);
-	// Riser 2 processing here
-	// riser_2 = ...
-
 	riser_3 = PlayBuf.ar(2, riser_3_buffer.bufnum, BufRateScale.kr(riser_3_buffer), doneAction: 2);
-	// Riser 3 processing here
-	// riser_3 = ...
-
 	upfilter = PlayBuf.ar(2, upfilter_buffer.bufnum, BufRateScale.kr(upfilter_buffer), doneAction: 2);
-	// Upfilter processing here
-	// upfilter = ...
-
 	downfilter = PlayBuf.ar(2, downfilter_buffer.bufnum, BufRateScale.kr(downfilter_buffer), doneAction: 2);
-	// Downfilter processing here
-	// downfilter = ...
-
 	noise_hit = PlayBuf.ar(2, noise_hit_buffer.bufnum, BufRateScale.kr(noise_hit_buffer), doneAction: 2);
-	// Noise Hit processing here
-	// noise_hit = ...
-
 	woosh = PlayBuf.ar(2, woosh_buffer.bufnum, BufRateScale.kr(woosh_buffer), doneAction: 2);
-	// Upfilter processing here
-	// upfilter = ...
 
 
 
@@ -232,7 +182,7 @@ SynthDef.new(\synthesized_master, {
 		bass_1, bass_1_octave, bass_2, bass_2_octave
 	]);
 	bass_buss = DCompressor.ar(bass_buss, ratio: 2.29, threshold: -25.5, attack: 0.8, release: 7.52, makeup: 3);
-	bass_buss = Greyhole.ar(bass_buss, delayTime: 0.003, feedback: 0.23, modDepth: 0.0042, modFreq:0.38);
+	bass_buss = FreeVerb.ar(bass_buss, 0.25, 0.1, 0.1, 0.7);
 	bass_buss = BHiPass.ar(bass_buss, freq: 22.938, rq: 1.285);
 	bass_buss = BPeakEQ.ar(bass_buss, freq: 70.057, rq: 1, db: 1.22);
 	bass_buss = BPeakEQ.ar(bass_buss, freq: 912.61, rq: 1.216, db: 1.39);
@@ -253,7 +203,6 @@ SynthDef.new(\synthesized_master, {
 	leads_buss= BPeakEQ.ar(leads_buss, freq: 7737.9, rq: 1.953, db: 2.29);
 	leads_buss = BLowPass.ar(leads_buss, freq: 21278, rq: 1);
 
-
 	arps_buss = Mix([
 		arp_1, arp_2, arp_3
 	]);
@@ -268,6 +217,7 @@ SynthDef.new(\synthesized_master, {
 		riser_1, riser_2, riser_3, upfilter, downfilter, noise_hit, woosh
 	]);
 
+
 	///////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////
 	//////////////////////// MASTER ///////////////////////
@@ -278,7 +228,6 @@ SynthDef.new(\synthesized_master, {
 		drums_buss, bass_buss, pads_buss,
 		leads_buss, arps_buss, fx_buss
 	]);
-
 	master = BHiPass.ar(master, freq: 20, rq: 1.162);
 	master = BPeakEQ.ar(master, freq: 42.65, rq: 1, db: 1.39);
 	master = BPeakEQ.ar(master, freq: 110.76, rq: 0.521, db: -1.39);
