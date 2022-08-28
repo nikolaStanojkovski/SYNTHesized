@@ -18,17 +18,16 @@ A music project intended to create a whole <b>'synthwave'</b> song only with gen
 
 <hr />
 
-1. Clone the project resository locally with the following command:
+1. Clone the project repository locally with the following command:
 ```ruby
 git clone https://github.com/nikolaStanojkovski/SYNTHesized.git
 ```
 2. Enter the <b>Mix</b> folder, and then create a <b>Stems</b> folder inside it.
-3. Download all the audio <i>wave</i> files from the <a href="https://drive.google.com/drive/folders/1QoowgxKT6yO1_UKBS_Y0a0VO95JdAb_w?usp=sharing">Google Drive Link</a>.
-3. Copy all the downloaded audio files to the <b>Stems</b> folder.
-4. Open up the ``` mix_master.scd ``` file in <b>SuperCollider</b>, which is located inside the <b>Mix</b> folder.
-5. Open up the <i>Replace</i> window with navigating to the toolbar with ``` Edit -> Replace ```, or just use the shortcut ``` Ctrl + R ```.
-6. Replace all string instances of ``` <LOCAL_REPOSITORY_PATH> ``` with your local path to the repository where the project was cloned.
-7. Boot the server, run the ``` synthesized_master ``` synth-definition code, and then run the synth, which is being called on the last line of the ``` mix_master.scd ``` file:
+3. Move all of the <i>audio <b>.wav</b></i> files you downloaded to the <b>Stems</b> folder. 
+4. Use <b>SuperCollider</b> to open the ``` mix_master.scd ``` file, which is located inside the <b>Mix</b> folder. 
+5. Go to the toolbar and select ``` Edit->Replace ```, or simply press ``` Ctrl + R ``` to open the <i>Replace</i> window. 
+6. Replace all ``` <LOCAL_REPOSITORY_PATH> ``` string instances with the local path to the repository where the project was previously cloned. 
+7. Start the server, then run the ``` synthesized_master ``` synth-definition code, followed by the synth called on the last line of the ``` mix_master.scd ``` file:
 ```ruby
 Synth(\synthesized_master);
 ```
