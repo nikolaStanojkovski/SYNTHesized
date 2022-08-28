@@ -16,7 +16,9 @@ A music project intended to create a whole <b>'synthwave'</b> song only with gen
 
 ## Local setup
 
-1. Clone the project resository locally with the following command: 
+<hr />
+
+1. Clone the project resository locally with the following command:
 ```ruby
 git clone https://github.com/nikolaStanojkovski/SYNTHesized.git
 ```
