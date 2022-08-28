@@ -10,34 +10,34 @@ SynthDef.new(\synthesized_master, {
 	kick, kick_1, kick_2, snare, cymbals, bass_1, bass_1_octave, bass_2, bass_2_octave, filter_chords, pad,
 	arp_1, arp_2, arp_3, downfilter, lead_1_1, lead_1_2, lead_1_3, lead_1_4, lead_1_5, lead_1, lead_2, noise_hit, riser_1, riser_2, riser_3, upfilter, woosh, drums_buss, bass_buss, pads_buss, leads_buss, arps_buss, fx_buss, master;
 
-	kick_buffer = Buffer.read(s, "C:/Users/Nick/Documents/GitHub/SYNTHesized/Mix/Stems/SYNTHesized 01. KICK.wav");
-	snare_buffer = Buffer.read(s, "C:/Users/Nick/Documents/GitHub/SYNTHesized/Mix/Stems/SYNTHesized 02. SNARE.wav");
-	cymbals_buffer = Buffer.read(s, "C:/Users/Nick/Documents/GitHub/SYNTHesized/Mix/Stems/SYNTHesized 03 .HATS.wav");
-	bass_1_buffer = Buffer.read(s, "C:/Users/Nick/Documents/GitHub/SYNTHesized/Mix/Stems/SYNTHesized 04. BASS 1.wav");
-	bass_1_octave_buffer = Buffer.read(s, "C:/Users/Nick/Documents/GitHub/SYNTHesized/Mix/Stems/SYNTHesized 05. BASS 1 OCT.wav");
-	bass_2_buffer = Buffer.read(s, "C:/Users/Nick/Documents/GitHub/SYNTHesized/Mix/Stems/SYNTHesized 06. BASS 2.wav");
-	bass_2_octave_buffer = Buffer.read(s, "C:/Users/Nick/Documents/GitHub/SYNTHesized/Mix/Stems/SYNTHesized 07. BASS 2 OCT.wav");
-	filter_chords_buffer = Buffer.read(s, "C:/Users/Nick/Documents/GitHub/SYNTHesized/Mix/Stems/SYNTHesized 08. FILTER CHORDS.wav");
-	pad_buffer = Buffer.read(s, "C:/Users/Nick/Documents/GitHub/SYNTHesized/Mix/Stems/SYNTHesized 09. PAD.wav");
-	lead_1_1_buffer = Buffer.read(s, "C:/Users/Nick/Documents/GitHub/SYNTHesized/Mix/Stems/SYNTHesized 10. LEAD 1.wav");
-	lead_1_2_buffer = Buffer.read(s, "C:/Users/Nick/Documents/GitHub/SYNTHesized/Mix/Stems/SYNTHesized 11. LEAD 1.wav");
-	lead_1_3_buffer = Buffer.read(s, "C:/Users/Nick/Documents/GitHub/SYNTHesized/Mix/Stems/SYNTHesized 12. LEAD 1.wav");
-	lead_1_4_buffer = Buffer.read(s, "C:/Users/Nick/Documents/GitHub/SYNTHesized/Mix/Stems/SYNTHesized 13. LEAD 1.wav");
-	lead_1_5_buffer = Buffer.read(s, "C:/Users/Nick/Documents/GitHub/SYNTHesized/Mix/Stems/SYNTHesized 14. LEAD 1.wav");
-	lead_2_1_buffer = Buffer.read(s, "C:/Users/Nick/Documents/GitHub/SYNTHesized/Mix/Stems/SYNTHesized 15. LEAD 2.wav");
-	lead_2_2_buffer = Buffer.read(s, "C:/Users/Nick/Documents/GitHub/SYNTHesized/Mix/Stems/SYNTHesized 16. LEAD 2.wav");
-	lead_2_3_buffer = Buffer.read(s, "C:/Users/Nick/Documents/GitHub/SYNTHesized/Mix/Stems/SYNTHesized 17. LEAD 2.wav");
-	lead_2_4_buffer = Buffer.read(s, "C:/Users/Nick/Documents/GitHub/SYNTHesized/Mix/Stems/SYNTHesized 18. LEAD 2.wav");
-	arp_1_buffer = Buffer.read(s, "C:/Users/Nick/Documents/GitHub/SYNTHesized/Mix/Stems/SYNTHesized 19. ARP 1.wav");
-	arp_2_buffer = Buffer.read(s, "C:/Users/Nick/Documents/GitHub/SYNTHesized/Mix/Stems/SYNTHesized 20. ARP 2.wav");
-	arp_3_buffer = Buffer.read(s, "C:/Users/Nick/Documents/GitHub/SYNTHesized/Mix/Stems/SYNTHesized 21. ARP 3.wav");
-	upfilter_buffer = Buffer.read(s, "C:/Users/Nick/Documents/GitHub/SYNTHesized/Mix/Stems/SYNTHesized 22. UPLIFTER.wav");
-	downfilter_buffer = Buffer.read(s, "C:/Users/Nick/Documents/GitHub/SYNTHesized/Mix/Stems/SYNTHesized 23. DOWNLIFTER.wav");
-	noise_hit_buffer = Buffer.read(s, "C:/Users/Nick/Documents/GitHub/SYNTHesized/Mix/Stems/SYNTHesized 24. NOISE HIT.wav");
-	woosh_buffer = Buffer.read(s, "C:/Users/Nick/Documents/GitHub/SYNTHesized/Mix/Stems/SYNTHesized 25. WOOSH.wav");
-	riser_1_buffer = Buffer.read(s, "C:/Users/Nick/Documents/GitHub/SYNTHesized/Mix/Stems/SYNTHesized 26. RISER 1.wav");
-	riser_2_buffer = Buffer.read(s, "C:/Users/Nick/Documents/GitHub/SYNTHesized/Mix/Stems/SYNTHesized 27 RISER 2.wav");
-	riser_3_buffer = Buffer.read(s, "C:/Users/Nick/Documents/GitHub/SYNTHesized/Mix/Stems/SYNTHesized 28. RISER 3.wav");
+	kick_buffer = Buffer.read(s, "<LOCAL_REPOSITORY_PATH>/Mix/Stems/SYNTHesized 01. KICK.wav");
+	snare_buffer = Buffer.read(s, "<LOCAL_REPOSITORY_PATH>/Mix/Stems/SYNTHesized 02. SNARE.wav");
+	cymbals_buffer = Buffer.read(s, "<LOCAL_REPOSITORY_PATH>/Mix/Stems/SYNTHesized 03 .HATS.wav");
+	bass_1_buffer = Buffer.read(s, "<LOCAL_REPOSITORY_PATH>/Mix/Stems/SYNTHesized 04. BASS 1.wav");
+	bass_1_octave_buffer = Buffer.read(s, "<LOCAL_REPOSITORY_PATH>/Mix/Stems/SYNTHesized 05. BASS 1 OCT.wav");
+	bass_2_buffer = Buffer.read(s, "<LOCAL_REPOSITORY_PATH>/Mix/Stems/SYNTHesized 06. BASS 2.wav");
+	bass_2_octave_buffer = Buffer.read(s, "<LOCAL_REPOSITORY_PATH>/Mix/Stems/SYNTHesized 07. BASS 2 OCT.wav");
+	filter_chords_buffer = Buffer.read(s, "<LOCAL_REPOSITORY_PATH>/Mix/Stems/SYNTHesized 08. FILTER CHORDS.wav");
+	pad_buffer = Buffer.read(s, "<LOCAL_REPOSITORY_PATH>/Mix/Stems/SYNTHesized 09. PAD.wav");
+	lead_1_1_buffer = Buffer.read(s, "<LOCAL_REPOSITORY_PATH>/Mix/Stems/SYNTHesized 10. LEAD 1.wav");
+	lead_1_2_buffer = Buffer.read(s, "<LOCAL_REPOSITORY_PATH>/Mix/Stems/SYNTHesized 11. LEAD 1.wav");
+	lead_1_3_buffer = Buffer.read(s, "<LOCAL_REPOSITORY_PATH>/Mix/Stems/SYNTHesized 12. LEAD 1.wav");
+	lead_1_4_buffer = Buffer.read(s, "<LOCAL_REPOSITORY_PATH>/Mix/Stems/SYNTHesized 13. LEAD 1.wav");
+	lead_1_5_buffer = Buffer.read(s, "<LOCAL_REPOSITORY_PATH>/Mix/Stems/SYNTHesized 14. LEAD 1.wav");
+	lead_2_1_buffer = Buffer.read(s, "<LOCAL_REPOSITORY_PATH>/Mix/Stems/SYNTHesized 15. LEAD 2.wav");
+	lead_2_2_buffer = Buffer.read(s, "<LOCAL_REPOSITORY_PATH>/Mix/Stems/SYNTHesized 16. LEAD 2.wav");
+	lead_2_3_buffer = Buffer.read(s, "<LOCAL_REPOSITORY_PATH>/Mix/Stems/SYNTHesized 17. LEAD 2.wav");
+	lead_2_4_buffer = Buffer.read(s, "<LOCAL_REPOSITORY_PATH>/Mix/Stems/SYNTHesized 18. LEAD 2.wav");
+	arp_1_buffer = Buffer.read(s, "<LOCAL_REPOSITORY_PATH>/Mix/Stems/SYNTHesized 19. ARP 1.wav");
+	arp_2_buffer = Buffer.read(s, "<LOCAL_REPOSITORY_PATH>/Mix/Stems/SYNTHesized 20. ARP 2.wav");
+	arp_3_buffer = Buffer.read(s, "<LOCAL_REPOSITORY_PATH>/Mix/Stems/SYNTHesized 21. ARP 3.wav");
+	upfilter_buffer = Buffer.read(s, "<LOCAL_REPOSITORY_PATH>/Mix/Stems/SYNTHesized 22. UPLIFTER.wav");
+	downfilter_buffer = Buffer.read(s, "<LOCAL_REPOSITORY_PATH>/Mix/Stems/SYNTHesized 23. DOWNLIFTER.wav");
+	noise_hit_buffer = Buffer.read(s, "<LOCAL_REPOSITORY_PATH>/Mix/Stems/SYNTHesized 24. NOISE HIT.wav");
+	woosh_buffer = Buffer.read(s, "<LOCAL_REPOSITORY_PATH>/Mix/Stems/SYNTHesized 25. WOOSH.wav");
+	riser_1_buffer = Buffer.read(s, "<LOCAL_REPOSITORY_PATH>/Mix/Stems/SYNTHesized 26. RISER 1.wav");
+	riser_2_buffer = Buffer.read(s, "<LOCAL_REPOSITORY_PATH>/Mix/Stems/SYNTHesized 27 RISER 2.wav");
+	riser_3_buffer = Buffer.read(s, "<LOCAL_REPOSITORY_PATH>/Mix/Stems/SYNTHesized 28. RISER 3.wav");
 
 
 
@@ -56,15 +56,15 @@ SynthDef.new(\synthesized_master, {
 	kick_1 = BPeakEQ.ar(kick_1, freq: 5384.4, rq: 1.87, db: 6.86);
 	kick_1 = BPeakEQ.ar(kick_1, freq: 7591.6, rq: 0.4, db: -9.06);
 	kick_2 = BHiPass.ar(kick_2, freq: 17.728, rq: 1);
-	kick_2 = BPeakEQ.ar(kick_2, freq: 52.116, rq: 1, db: 2.7);
+	kick_2 = BPeakEQ.ar(kick_2, freq: 52.116, rq: 1, db: 1.5);
 	kick_2 = BLowPass.ar(kick_2, freq: 76.339, rq: 0.86);
-	kick_2 = AnalogVintageDistortion.ar(kick_2, bias: 0.7, drivegain: 0.25, lowgain: 0.07, highgain: 0.06);
+	kick_2 = AnalogVintageDistortion.ar(kick_2, bias: 0.7, drivegain: 0.2, lowgain: 0.05, highgain: 0.06);
 	kick = Mix([kick_1, kick_2]);
 	kick = DCompressor.ar(kick, sidechain: 0, ratio: 4, threshold: -24.1, attack: 30, release: 41.1, automakeup: 0);
 	kick = BHiPass.ar(kick, freq: 31.429, rq: 0.7);
 	kick = BPeakEQ.ar(kick, freq: 49.256, rq: 1.31, db: 2.45);
 	kick = BPeakEQ.ar(kick, freq: 351.44, rq: 2.75, db: -3.92);
-	kick = BPeakEQ.ar(kick, freq: 7519.5, rq: 2.22, db: 3.02);
+	kick = BPeakEQ.ar(kick, freq: 7519.5, rq: 2.22, db: 5);
 
 
 	// Snare processing
@@ -73,7 +73,7 @@ SynthDef.new(\synthesized_master, {
 	snare = BPeakEQ.ar(snare, freq: 132.78, rq: 0.47, db: 11.2);
 	snare = BPeakEQ.ar(snare, freq: 1053, rq: 0.53, db: -4.08);
 	snare = BPeakEQ.ar(snare, freq: 6272.6, rq: 0.27, db: -2.4);
-	snare = BLowPass.ar(snare, freq: 10200, rq: 0.93);
+	snare = BLowPass.ar(snare, freq: 8200, rq: 0.93);
 	snare = DCompressor.ar(snare, sidechain: 0, ratio: 4, threshold: -35, attack: 31.1, release: 6.35, automakeup: 0);
 
 
@@ -89,23 +89,19 @@ SynthDef.new(\synthesized_master, {
 	bass_1_octave = PlayBuf.ar(2, bass_1_octave_buffer.bufnum, BufRateScale.kr(bass_1_octave_buffer), doneAction: 2);
 	bass_1_octave = BPeakEQ.ar(bass_1_octave, freq: 635.03, rq: 0.592, db: 2.20);
 	bass_2 = PlayBuf.ar(2, bass_2_buffer.bufnum, BufRateScale.kr(bass_2_buffer), doneAction: 2);
-	bass_2 = BHiPass.ar(bass_2, freq: 1499, rq: 0.932);
+	bass_2 = BLowPass.ar(bass_2, freq: 1499, rq: 0.932);
 	bass_2_octave = PlayBuf.ar(2, bass_2_octave_buffer.bufnum, BufRateScale.kr(bass_2_octave_buffer), doneAction: 2);
-	bass_2_octave = BHiPass.ar(bass_2_octave, freq: 1499, rq: 0.932);
+	bass_2_octave = BLowPass.ar(bass_2_octave, freq: 1499, rq: 0.932);
 
 
 	// Pads processing
 	filter_chords = PlayBuf.ar(2, filter_chords_buffer.bufnum, BufRateScale.kr(filter_chords_buffer), doneAction: 2);
-	filter_chords = FreeVerb.ar(filter_chords, 0.25, 0.1, 0.1, 0.7);
-	filter_chords = FreeVerb.ar(filter_chords, mix: 0.44);
-	filter_chords = DCompressor.ar(filter_chords, ratio: 2.46, attack: 0.42, release: 100, threshold: -22.9);
+	filter_chords = DCompressor.ar(filter_chords, ratio: 2.46, attack: 0.42, release: 100, threshold: -12);
 	filter_chords = BHiPass.ar(filter_chords, freq: 64.908, rq: 1.11);
 	filter_chords = BPeakEQ.ar(filter_chords, freq: 368.61, rq: 1, db: -1.88);
 	filter_chords = BPeakEQ.ar(filter_chords, freq: 870.09, rq: 1, db: -3.10);
 	pad = PlayBuf.ar(2, pad_buffer.bufnum, BufRateScale.kr(pad_buffer), doneAction: 2);
-	pad = FreeVerb.ar(pad, 0.25, 0.1, 0.1, 0.7);
-	pad = FreeVerb.ar(pad, mix: 0.60);
-	pad= DCompressor.ar(pad, ratio: 2.46, attack: 0.42, release: 100, threshold: -34);
+	pad = DCompressor.ar(pad, ratio: 2.46, attack: 0.42, release: 100, threshold: -16);
 
 
 	// Leads processing
@@ -133,11 +129,8 @@ SynthDef.new(\synthesized_master, {
 	lead_2 = FreeVerb.ar(lead_2, 0.25, 0.1, 0.1, 0.7);
 	lead_2 = BHiPass.ar(lead_2, freq: 178.48, rq: 1.259);
 	lead_2 = BPeakEQ.ar(lead_2, freq: 1456.7, rq: 1, db: -1.96);
-	lead_2 = BPeakEQ.ar(lead_2, freq: 6272.6, rq: 1, db: 1.55);
-	lead_2 = FreeVerb.ar(lead_2, 0.25, 0.1, 0.1, 0.7);
-	lead_2 = BHiPass.ar(lead_1, freq: 178.48, rq: 0.794);
-	lead_2 = BPeakEQ.ar(lead_1, freq: 1456.7, rq: 1, db: -1.96);
-	lead_2 = BPeakEQ.ar(lead_1, freq: 6272.6, rq: 1, db: 1.55);
+	lead_2 = BPeakEQ.ar(lead_2, freq: 6272.6, rq: 1, db: 1.55); // 1.55
+	lead_2 = Limiter.ar(lead_2, 0.5, 0.01);
 
 
 	// Arps processing
@@ -157,7 +150,6 @@ SynthDef.new(\synthesized_master, {
 	downfilter = PlayBuf.ar(2, downfilter_buffer.bufnum, BufRateScale.kr(downfilter_buffer), doneAction: 2);
 	noise_hit = PlayBuf.ar(2, noise_hit_buffer.bufnum, BufRateScale.kr(noise_hit_buffer), doneAction: 2);
 	woosh = PlayBuf.ar(2, woosh_buffer.bufnum, BufRateScale.kr(woosh_buffer), doneAction: 2);
-
 
 
 	///////////////////////////////////////////////////////
@@ -182,7 +174,6 @@ SynthDef.new(\synthesized_master, {
 		bass_1, bass_1_octave, bass_2, bass_2_octave
 	]);
 	bass_buss = DCompressor.ar(bass_buss, ratio: 2.29, threshold: -25.5, attack: 0.8, release: 7.52, makeup: 3);
-	bass_buss = FreeVerb.ar(bass_buss, 0.25, 0.1, 0.1, 0.7);
 	bass_buss = BHiPass.ar(bass_buss, freq: 22.938, rq: 1.285);
 	bass_buss = BPeakEQ.ar(bass_buss, freq: 70.057, rq: 1, db: 1.22);
 	bass_buss = BPeakEQ.ar(bass_buss, freq: 912.61, rq: 1.216, db: 1.39);
@@ -195,6 +186,7 @@ SynthDef.new(\synthesized_master, {
 	pads_buss = BPeakEQ.ar(pads_buss, freq: 605.45, rq: 1, db: -1.88);
 	pads_buss = BPeakEQ.ar(pads_buss, freq: 5701.7, rq: 1.61, db: 1.96);
 	pads_buss = BLowPass.ar(pads_buss, freq: 13718, rq: 1.15);
+	pads_buss = Limiter.ar(pads_buss, 0.45, 0.01);
 
 	leads_buss = Mix([
 		lead_1_1, lead_1_2, lead_1_3, lead_1_4, lead_1_5, lead_2
@@ -239,6 +231,5 @@ SynthDef.new(\synthesized_master, {
 	Out.ar(out, master * amplitude);
 }).add;
 )
-
 
 Synth(\synthesized_master);
