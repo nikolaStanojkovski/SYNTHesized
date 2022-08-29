@@ -10,22 +10,15 @@ SynthDef.new(\cowbell, {
 		[attack, decay, sustain, release], [curve, curve, curve, curve]), doneAction:2);
 
 	sig = Saw.ar([440, 865]) * env;
-
-
 	noise = PinkNoise.ar(0.25) * 0.2;
 
-
 	noise = HPF.ar(noise, 420);
-
 	noise = LPF.ar(noise, 900);
 
-
 	sig = Mix.new([sig, noise])!2;
-	
 	sig = FreeVerb.ar(sig, mix: 0.4, room:0.4, mul:0.8);
 
 	Out.ar(out, sig);
-
 }).add;
 )
 
