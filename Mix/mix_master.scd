@@ -129,8 +129,8 @@ SynthDef.new(\synthesized_master, {
 	lead_2 = FreeVerb.ar(lead_2, 0.25, 0.1, 0.1, 0.7);
 	lead_2 = BHiPass.ar(lead_2, freq: 178.48, rq: 1.259);
 	lead_2 = BPeakEQ.ar(lead_2, freq: 1456.7, rq: 1, db: -1.96);
-	lead_2 = BPeakEQ.ar(lead_2, freq: 6272.6, rq: 1, db: 1.55); // 1.55
-	lead_2 = Limiter.ar(lead_2, 0.5, 0.01);
+	lead_2 = BPeakEQ.ar(lead_2, freq: 6272.6, rq: 1, db: 1.55);
+	lead_2 = Limiter.ar(lead_2, 0.8, 0.01);
 
 
 	// Arps processing
